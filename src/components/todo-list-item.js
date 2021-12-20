@@ -1,6 +1,6 @@
 const TodoListItem = ({label, important = false} ) => {
     const colorLabel = {
-        color: important ? "black" : "tomato"
+        color: important ? "tomato" : "black"
     }
     
     return <span style={colorLabel}>{label}</span>

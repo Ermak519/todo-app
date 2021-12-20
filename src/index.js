@@ -19,6 +19,18 @@ const App = () => {
       label: 'Third list item',
       important: false
     },
+    {
+      label: 'шгщкурш list item',
+      important: false
+    },
+    {
+      label: 'овьраньапрь',
+      important: true
+    },
+    {
+      label: 'пронкенннннноекнок',
+      important: false
+    },
   ]
 
   return (
