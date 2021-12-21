@@ -1,0 +1,9 @@
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.app-header h6 {
+  color: gray;
+}
