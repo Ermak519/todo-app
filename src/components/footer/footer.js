@@ -4,9 +4,9 @@ import './footer.css'
 const Footer = () => {
     return (
         <>
-            <footer class="footer">
-                <span class="todo-count">1 items left</span>
-                <ul class="filters">
+            <footer className="footer">
+                <span className="todo-count">1 items left</span>
+                <ul className="filters">
                     <TasksFilter
                         btnStatus='selected'
                         btnContent='All' />
@@ -15,7 +15,7 @@ const Footer = () => {
                     <TasksFilter
                         btnContent='Completed' />
                 </ul>
-                <button class="clear-completed">Clear completed</button>
+                <button className="clear-completed">Clear completed</button>
             </footer>
         </>
     )

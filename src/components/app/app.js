@@ -1,16 +1,19 @@
 import React from "react";
 
-import AppHeader from "../app-header";
+import NewTaskForm from '../new-task-form'
 import TaskList from "../task-list";
 
 import './app.css';
 
 const App = () => {
   return (
-    <div className="todoapp">
-      <AppHeader />
+    <section className="todoapp">
+      <header className="header">
+        <h1>todos</h1>
+        <NewTaskForm />
+      </header>
       <TaskList />
-    </div>
+    </section>
   )
 }
 
