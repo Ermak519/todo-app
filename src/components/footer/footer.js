@@ -1,11 +1,11 @@
 import TasksFilter from '../tasks-filter'
 import './footer.css'
 
-const Footer = () => {
+const Footer = ({ count }) => {
     return (
         <>
             <footer className="footer">
-                <span className="todo-count">1 items left</span>
+                <span className="todo-count">{count} items left</span>
                 <ul className="filters">
                     <TasksFilter
                         btnStatus='selected'
