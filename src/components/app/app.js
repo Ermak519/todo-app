@@ -1,42 +1,50 @@
-import React from "react";
+import React, {Component} from "react";
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
 import NewTaskForm from '../new-task-form'
 import TaskList from "../task-list";
 
 import './app.css';
 
-const App = () => {
-  const tasksData = [
-    {
-      id: 1,
-      status: 'completed',
-      description: 'Completed task',
-      created: 'created 17 seconds ago'
-    },
-    {
-      id: 2,
-      status: 'editing',
-      description: 'Editing task',
-      created: 'created 5 minutes ago'
-    },
-    {
-      id: 3,
-      status: '',
-      description: 'Active task',
-      created: 'created 17 seconds ago'
-    }
-  ];
+export default class App extends Component{
 
-  return (
-    <section className="todoapp">
-      <header className="header">
-        <h1>todos</h1>
-        <NewTaskForm />
-      </header>
-      <TaskList
-        tasksData={tasksData} />
-    </section>
-  )
+  constructor(){
+    super();
+    this.timeCreated = formatDistanceToNow(new Date(2021, 6, 2), { addSuffix: true })
+  }
+
+  state = {
+    tasksData: [
+      {
+        id: 1,
+        description: 'Completed task',
+        created: `created ${this.timeCreated}`
+      },
+      {
+        id: 2,
+        description: 'Editing task',
+        created: `created ${this.timeCreated}`
+      },
+      {
+        id: 3,
+        description: 'Active task',
+        created: `created ${this.timeCreated}`
+      }
+    ]
+  }
+
+  render () {
+    const {tasksData} = this.state;
+
+    return (
+      <section className="todoapp">
+        <header className="header">
+          <h1>todos</h1>
+          <NewTaskForm />
+        </header>
+        <TaskList
+          tasksData={tasksData} />
+      </section>
+    );
+  }
 }
-
-export default App;
