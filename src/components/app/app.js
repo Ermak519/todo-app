@@ -29,6 +29,21 @@ export default class App extends Component {
       }
     ]
   }
+  addTask = (text) => {
+    this.setState(({ tasksData }) => {
+      const lastId = tasksData.length + 1;
+      const newItem = {
+        id: lastId,
+        description: text,
+        doneStatus: false,
+        editStatus: false,
+      }
+
+      return {
+        tasksData: [...tasksData, newItem]
+      };
+    });
+  };
 
   doneTask = (id) => {
     this.setState(({ tasksData }) => {
@@ -46,12 +61,25 @@ export default class App extends Component {
     this.setState(({ tasksData }) => {
       const idx = tasksData.findIndex(obj => obj.id === id);
       const [item] = tasksData.slice(idx);
-      item.editStatus = !item.editStatus;
+      item.editStatus = true;
       const newArr = [...tasksData.slice(0, idx), item, ...tasksData.slice(idx + 1)];
       return {
         tasksData: newArr
       }
     });
+  }
+
+  confirmEditingTask = (id, text) => {
+    this.setState(({ tasksData }) => {
+      const idx = tasksData.findIndex(obj => obj.id === id);
+      const [item] = tasksData.slice(idx);
+      item.description = text;
+      item.editStatus = false;
+      const newArr = [...tasksData.slice(0, idx), item, ...tasksData.slice(idx + 1)];
+      return {
+        tasksData: newArr
+      }
+    })
   }
 
   deleteTask = (id) => {
@@ -73,12 +101,15 @@ export default class App extends Component {
       <section className="todoapp">
         <header className="header">
           <h1>todos</h1>
-          <NewTaskForm />
+          <NewTaskForm
+            onAddTask={this.addTask}
+            allTasks={tasksData} />
         </header>
         <TaskList
           tasksData={tasksData}
           onDoneTask={this.doneTask}
           onEditTask={this.editTask}
+          onConfirmEditingTask={this.confirmEditingTask}
           onDeleteTask={this.deleteTask}
           count={allCount}
         />

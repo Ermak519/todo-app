@@ -1,10 +1,16 @@
 import './tasks-filter.css'
 
-const TasksFilter = ({ btnStatus = '', btnContent }) => {
+const TasksFilter = () => {
     return (
         <>
             <li>
-                <button className={btnStatus}>{btnContent}</button>
+                <button className='selected'>All</button>
+            </li>
+            <li>
+                <button>Active</button>
+            </li>
+            <li>
+                <button>Completed</button>
             </li>
         </>
 

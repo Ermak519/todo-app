@@ -7,13 +7,7 @@ const Footer = ({ count }) => {
             <footer className="footer">
                 <span className="todo-count">{count} items left</span>
                 <ul className="filters">
-                    <TasksFilter
-                        btnStatus='selected'
-                        btnContent='All' />
-                    <TasksFilter
-                        btnContent='Active' />
-                    <TasksFilter
-                        btnContent='Completed' />
+                    <TasksFilter />
                 </ul>
                 <button className="clear-completed">Clear completed</button>
             </footer>
