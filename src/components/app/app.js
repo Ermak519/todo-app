@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+
 import NewTaskForm from '../new-task-form'
 import TaskList from "../task-list";
 
@@ -14,18 +16,21 @@ export default class App extends Component {
         description: 'Completed task',
         doneStatus: false,
         editStatus: false,
+        createDate: formatDistanceToNow(new Date(2021, 9, 2), { addSuffix: true })
       },
       {
         id: 2,
         description: 'Editing task',
         doneStatus: false,
         editStatus: false,
+        createDate: formatDistanceToNow(new Date(2021, 11, 2), { addSuffix: true })
       },
       {
         id: 3,
         description: 'Active task',
         doneStatus: false,
         editStatus: false,
+        createDate: formatDistanceToNow(new Date(2021, 6, 2), { addSuffix: true })
       }
     ]
   }
@@ -37,6 +42,7 @@ export default class App extends Component {
         description: text,
         doneStatus: false,
         editStatus: false,
+        createDate: formatDistanceToNow(new Date(), { addSuffix: true })
       }
 
       return {

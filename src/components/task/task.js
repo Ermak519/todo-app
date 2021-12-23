@@ -1,4 +1,3 @@
-import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import { Component } from 'react';
 
 import './task.css'
@@ -20,8 +19,7 @@ export default class Task extends Component {
     }
 
     render() {
-        const strDate = formatDistanceToNow(new Date(2021, 6, 2), { addSuffix: true })
-        const { description, doneStatus, editStatus, onDoneTask, onEditTask, onDeleteTask } = this.props;
+        const { description, doneStatus, editStatus, onDoneTask, onEditTask, onDeleteTask, createDate } = this.props;
         let taskState = '';
         if (doneStatus) taskState = 'completed';
         if (editStatus) taskState = 'editing';
@@ -32,7 +30,7 @@ export default class Task extends Component {
                     <input className="toggle" type="checkbox" onClick={onDoneTask} />
                     <label>
                         <span className="description" >{description}</span>
-                        <span className="created">{strDate}</span>
+                        <span className="created">created {createDate}</span>
                     </label>
                     <button className="icon icon-edit" onClick={onEditTask}></button>
                     <button className="icon icon-destroy" onClick={onDeleteTask}></button>

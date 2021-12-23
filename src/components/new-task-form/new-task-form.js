@@ -19,8 +19,8 @@ export default class NewTaskForm extends Component {
                 this.props.onAddTask(this.state.label);
                 this.setState({
                     label: ''
-                })
-            }
+                });
+            };
         });
     }
 
