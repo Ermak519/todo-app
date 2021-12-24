@@ -4,7 +4,7 @@ import './task.css'
 
 export default class Task extends Component {
     state = {
-        label: ''
+        label: this.props.description
     }
 
     changeDescr = (e) => {
@@ -39,8 +39,9 @@ export default class Task extends Component {
                     <input
                         type="text"
                         className="edit"
-                        placeholder={this.props.description}
-                        onChange={this.changeDescr} />
+                        value={this.state.label}
+                        onChange={this.changeDescr}
+                        autoFocus />
                 </form>
             </li>
         );

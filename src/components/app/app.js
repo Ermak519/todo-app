@@ -32,8 +32,28 @@ export default class App extends Component {
         editStatus: false,
         createDate: formatDistanceToNow(new Date(2021, 6, 2), { addSuffix: true })
       }
+    ],
+    btnStatus: [
+      {id: 1, descr: 'All', status: true},
+      {id: 2, descr: 'Active', status: false},
+      {id: 3, descr: 'Completed', status: false},
     ]
-  }
+  };
+
+  filterTasks = (id) => {
+    this.setState(({btnStatus})=>{
+      const idx = btnStatus.findIndex(obj => obj.id === id);
+      const arr = [...btnStatus]
+      arr.forEach(obj => obj.status = false)
+      const item = arr[idx]
+      item.status = true;
+      const newArr = [...arr.slice(0, idx), item, ...arr.slice(idx + 1)]
+      return {
+        btnStatus: newArr
+      }
+    })
+  };
+
   addTask = (text) => {
     this.setState(({ tasksData }) => {
       const lastId = tasksData.length + 1;
@@ -99,7 +119,7 @@ export default class App extends Component {
   }
 
   render() {
-    const { tasksData } = this.state;
+    const { tasksData, btnStatus } = this.state;
     const doneCount = tasksData.filter(obj => obj.doneStatus).length;
     const allCount = tasksData.length - doneCount;
 
@@ -118,6 +138,8 @@ export default class App extends Component {
           onConfirmEditingTask={this.confirmEditingTask}
           onDeleteTask={this.deleteTask}
           count={allCount}
+          btnFiltersStatus={btnStatus}
+          onFilter={this.filterTasks}
         />
       </section>
     );

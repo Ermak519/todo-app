@@ -1,17 +1,20 @@
 import './tasks-filter.css'
 
-const TasksFilter = () => {
+const TasksFilter = ({btnFiltersStatus, onFilter}) => {
+    const arr = btnFiltersStatus.map((obj) => {
+        let classBtn = ''
+        if(obj.status) classBtn = 'selected'
+        return (
+            <li key={obj.id}>
+                <button 
+                    className={classBtn}
+                    onClick={()=>{onFilter(obj.id)}}>{obj.descr}</button>
+            </li>
+        );
+    })
     return (
         <>
-            <li>
-                <button className='selected'>All</button>
-            </li>
-            <li>
-                <button>Active</button>
-            </li>
-            <li>
-                <button>Completed</button>
-            </li>
+            {arr}
         </>
 
     );
