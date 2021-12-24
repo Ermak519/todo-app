@@ -6,7 +6,6 @@ import NewTaskForm from '../new-task-form'
 import TaskList from "../task-list";
 
 import './app.css';
-//добавить для чекбокса состояние при выполненной таске
 //разобраться с ошибкой при добавлении таски
 export default class App extends Component {
 

@@ -27,7 +27,7 @@ export default class Task extends Component {
         return (
             <li className={taskState}>
                 <div className="view">
-                    <input className="toggle" type="checkbox" onClick={onDoneTask} />
+                    <input className="toggle" type="checkbox" onClick={onDoneTask} defaultChecked={this.props.doneStatus} />
                     <label>
                         <span className="description" >{description}</span>
                         <span className="created">created {createDate}</span>
