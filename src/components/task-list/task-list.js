@@ -3,7 +3,7 @@ import Footer from '../footer';
 
 import './task-list.css'
 
-const TaskList = ({ tasksData, onDoneTask, onEditTask, onDeleteTask, onConfirmEditingTask, count, btnFiltersStatus,onFilter }) => {
+const TaskList = ({ tasksData, onDoneTask, onEditTask, onDeleteTask, onConfirmEditingTask, count, btnFiltersStatus, onFilter, onDeleteDoneTasks }) => {
 
   const arrTasks = tasksData.map((obj) => {
     const { id, ...data } = obj;
@@ -14,7 +14,7 @@ const TaskList = ({ tasksData, onDoneTask, onEditTask, onDeleteTask, onConfirmEd
         onDoneTask={() => { onDoneTask(id) }}
         onEditTask={() => { onEditTask(id) }}
         onDeleteTask={() => { onDeleteTask(id) }}
-        onConfirmEditingTask={(id, text)=>{onConfirmEditingTask(id, text)}}
+        onConfirmEditingTask={(id, text) => { onConfirmEditingTask(id, text) }}
         id={id}
         key={id} />
     );
@@ -28,6 +28,7 @@ const TaskList = ({ tasksData, onDoneTask, onEditTask, onDeleteTask, onConfirmEd
       <Footer
         btnFiltersStatus={btnFiltersStatus}
         onFilter={onFilter}
+        onDeleteDoneTasks={onDeleteDoneTasks}
         count={count} />
     </section>
   );

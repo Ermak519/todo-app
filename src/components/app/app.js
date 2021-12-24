@@ -6,7 +6,8 @@ import NewTaskForm from '../new-task-form'
 import TaskList from "../task-list";
 
 import './app.css';
-
+//добавить для чекбокса состояние при выполненной таске
+//разобраться с ошибкой при добавлении таски
 export default class App extends Component {
 
   state = {
@@ -34,15 +35,15 @@ export default class App extends Component {
       }
     ],
     btnStatus: [
-      {id: 1, descr: 'All', status: true},
-      {id: 2, descr: 'Active', status: false},
-      {id: 3, descr: 'Completed', status: false},
+      { id: 1, descr: 'All', status: true },
+      { id: 2, descr: 'Active', status: false },
+      { id: 3, descr: 'Completed', status: false },
     ],
     filterStatus: 'all'
   };
 
   filterTasks = (id) => {
-    this.setState(({btnStatus})=>{
+    this.setState(({ btnStatus }) => {
       const idx = btnStatus.findIndex(obj => obj.id === id);
       const arr = [...btnStatus]
       arr.forEach(obj => obj.status = false)
@@ -59,11 +60,11 @@ export default class App extends Component {
   toggleFilterTasks = (posts, filter) => {
     switch (filter) {
       case 'active':
-        return posts.filter((obj) => {return !obj.doneStatus});
+        return posts.filter((obj) => { return !obj.doneStatus });
       case 'completed':
-        return posts.filter((obj) => {return obj.doneStatus});
+        return posts.filter((obj) => { return obj.doneStatus });
       default:
-        return posts.filter((obj) => {return obj})
+        return posts.filter((obj) => { return obj })
     }
   }
 
@@ -131,6 +132,15 @@ export default class App extends Component {
     });
   }
 
+  deleteAllDoneTasks = () => {
+    this.setState(({ tasksData }) => {
+      const unDoneTasks = tasksData.filter(obj => !obj.doneStatus);
+      return {
+        tasksData: unDoneTasks
+      };
+    });
+  };
+
   render() {
     const { tasksData, btnStatus, filterStatus } = this.state;
     const doneCount = tasksData.filter(obj => obj.doneStatus).length;
@@ -154,6 +164,7 @@ export default class App extends Component {
           count={allCount}
           btnFiltersStatus={btnStatus}
           onFilter={this.filterTasks}
+          onDeleteDoneTasks={this.deleteAllDoneTasks}
         />
       </section>
     );
