@@ -37,7 +37,8 @@ export default class App extends Component {
       {id: 1, descr: 'All', status: true},
       {id: 2, descr: 'Active', status: false},
       {id: 3, descr: 'Completed', status: false},
-    ]
+    ],
+    filterStatus: 'all'
   };
 
   filterTasks = (id) => {
@@ -49,10 +50,22 @@ export default class App extends Component {
       item.status = true;
       const newArr = [...arr.slice(0, idx), item, ...arr.slice(idx + 1)]
       return {
-        btnStatus: newArr
+        btnStatus: newArr,
+        filterStatus: item.descr.toLowerCase()
       }
     })
   };
+
+  toggleFilterTasks = (posts, filter) => {
+    switch (filter) {
+      case 'active':
+        return posts.filter((obj) => {return !obj.doneStatus});
+      case 'completed':
+        return posts.filter((obj) => {return obj.doneStatus});
+      default:
+        return posts.filter((obj) => {return obj})
+    }
+  }
 
   addTask = (text) => {
     this.setState(({ tasksData }) => {
@@ -119,9 +132,10 @@ export default class App extends Component {
   }
 
   render() {
-    const { tasksData, btnStatus } = this.state;
+    const { tasksData, btnStatus, filterStatus } = this.state;
     const doneCount = tasksData.filter(obj => obj.doneStatus).length;
     const allCount = tasksData.length - doneCount;
+    const posts = this.toggleFilterTasks(tasksData, filterStatus);
 
     return (
       <section className="todoapp">
@@ -132,7 +146,7 @@ export default class App extends Component {
             allTasks={tasksData} />
         </header>
         <TaskList
-          tasksData={tasksData}
+          tasksData={posts}
           onDoneTask={this.doneTask}
           onEditTask={this.editTask}
           onConfirmEditingTask={this.confirmEditingTask}
