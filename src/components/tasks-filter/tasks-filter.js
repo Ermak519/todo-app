@@ -1,14 +1,15 @@
+import PropTypes from "prop-types"
 import './tasks-filter.css'
 
-const TasksFilter = ({btnFiltersStatus, onFilter}) => {
+const TasksFilter = ({ btnFiltersStatus, onFilter }) => {
     const arr = btnFiltersStatus.map((obj) => {
         let classBtn = ''
-        if(obj.status) classBtn = 'selected'
+        if (obj.status) classBtn = 'selected'
         return (
             <li key={obj.id}>
-                <button 
+                <button
                     className={classBtn}
-                    onClick={()=>{onFilter(obj.id)}}>{obj.descr}</button>
+                    onClick={() => { onFilter(obj.id) }}>{obj.descr}</button>
             </li>
         );
     })
@@ -19,5 +20,14 @@ const TasksFilter = ({btnFiltersStatus, onFilter}) => {
 
     );
 };
+TasksFilter.defaultProps = {
+    btnFiltersStatus: [],
+    onFilter: () => { },
+}
+
+TasksFilter.propTypes = {
+    btnFiltersStatus: PropTypes.array,
+    onFilter: PropTypes.func,
+}
 
 export default TasksFilter;

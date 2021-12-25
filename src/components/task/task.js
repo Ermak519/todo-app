@@ -1,3 +1,4 @@
+import PropTypes from "prop-types"
 import { Component } from 'react';
 
 import './task.css'
@@ -27,7 +28,7 @@ export default class Task extends Component {
         return (
             <li className={taskState}>
                 <div className="view">
-                    <input className="toggle" type="checkbox" onClick={onDoneTask} defaultChecked={this.props.doneStatus} />
+                    <input className="toggle" type="checkbox" onClick={onDoneTask} defaultChecked={doneStatus} />
                     <label>
                         <span className="description" >{description}</span>
                         <span className="created">created {createDate}</span>
@@ -46,4 +47,28 @@ export default class Task extends Component {
             </li>
         );
     }
+}
+
+Task.defaultProps = {
+    description: 'error',
+    doneStatus: false,
+    editStatus: false,
+    onDoneTask: () => { },
+    onEditTask: () => { },
+    onDeleteTask: () => { },
+    id: 0,
+    onFilter: () => { },
+    createDate: '1999 date'
+}
+
+Task.propTypes = {
+    description: PropTypes.string,
+    doneStatus: PropTypes.bool,
+    editStatus: PropTypes.bool,
+    onDoneTask: PropTypes.func,
+    onEditTask: PropTypes.func,
+    onDeleteTask: PropTypes.func,
+    id: PropTypes.number,
+    onFilter: PropTypes.func,
+    createDate: PropTypes.string,
 }

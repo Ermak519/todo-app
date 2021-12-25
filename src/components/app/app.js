@@ -14,7 +14,7 @@ export default class App extends Component {
       {
         id: 1,
         description: 'Completed task',
-        doneStatus: false,
+        doneStatus: true,
         editStatus: false,
         createDate: formatDistanceToNow(new Date(2021, 9, 2), { addSuffix: true })
       },
@@ -22,7 +22,7 @@ export default class App extends Component {
         id: 2,
         description: 'Editing task',
         doneStatus: false,
-        editStatus: false,
+        editStatus: true,
         createDate: formatDistanceToNow(new Date(2021, 11, 2), { addSuffix: true })
       },
       {

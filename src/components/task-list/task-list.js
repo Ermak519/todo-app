@@ -1,3 +1,5 @@
+import PropTypes from "prop-types"
+
 import Task from '../task';
 import Footer from '../footer';
 
@@ -33,5 +35,29 @@ const TaskList = ({ tasksData, onDoneTask, onEditTask, onDeleteTask, onConfirmEd
     </section>
   );
 };
+
+TaskList.defaultProps = {
+  tasksData: [],
+  onDoneTask: () => { },
+  onEditTask: () => { },
+  onDeleteTask: () => { },
+  onConfirmEditingTask: () => { },
+  count: 0,
+  btnFiltersStatus: [],
+  onFilter: () => { },
+  onDeleteDoneTasks: () => { },
+}
+
+TaskList.propTypes = {
+  tasksData: PropTypes.array,
+  onDoneTask: PropTypes.func,
+  onEditTask: PropTypes.func,
+  onDeleteTask: PropTypes.func,
+  onConfirmEditingTask: PropTypes.func,
+  count: PropTypes.number,
+  btnFiltersStatus: PropTypes.array,
+  onFilter: PropTypes.func,
+  onDeleteDoneTasks: PropTypes.func,
+}
 
 export default TaskList;
