@@ -41,6 +41,8 @@ export default class App extends Component {
     filterStatus: 'all'
   };
 
+  maxId = 4;
+
   filterTasks = (id) => {
     this.setState(({ btnStatus }) => {
       const idx = btnStatus.findIndex(obj => obj.id === id);
@@ -69,7 +71,7 @@ export default class App extends Component {
 
   addTask = (text) => {
     this.setState(({ tasksData }) => {
-      const lastId = tasksData.length + 1;
+      const lastId = this.maxId + 1;
       const newItem = {
         id: lastId,
         description: text,
