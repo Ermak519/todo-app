@@ -38,10 +38,8 @@ export default class App extends Component {
       { id: 2, descr: 'Active', status: false },
       { id: 3, descr: 'Completed', status: false },
     ],
-    filterStatus: 'all'
+    filterStatus: 'all',
   };
-
-  maxId = 4;
 
   filterTasks = (id) => {
     this.setState(({ btnStatus }) => {
@@ -50,9 +48,8 @@ export default class App extends Component {
       arr.forEach(obj => obj.status = false)
       const item = arr[idx]
       item.status = true;
-      const newArr = [...arr.slice(0, idx), item, ...arr.slice(idx + 1)]
       return {
-        btnStatus: newArr,
+        btnStatus: [...arr.slice(0, idx), item, ...arr.slice(idx + 1)],
         filterStatus: item.descr.toLowerCase()
       }
     })
@@ -71,7 +68,7 @@ export default class App extends Component {
 
   addTask = (text) => {
     this.setState(({ tasksData }) => {
-      const lastId = this.maxId + 1;
+      const lastId = tasksData.length + 1;
       const newItem = {
         id: lastId,
         description: text,
@@ -79,7 +76,6 @@ export default class App extends Component {
         editStatus: false,
         createDate: formatDistanceToNow(new Date(), { addSuffix: true })
       }
-
       return {
         tasksData: [...tasksData, newItem]
       };
@@ -91,9 +87,8 @@ export default class App extends Component {
       const idx = tasksData.findIndex(obj => obj.id === id);
       const [item] = tasksData.slice(idx);
       item.doneStatus = !item.doneStatus;
-      const newArr = [...tasksData.slice(0, idx), item, ...tasksData.slice(idx + 1)];
       return {
-        tasksData: newArr
+        tasksData: [...tasksData.slice(0, idx), item, ...tasksData.slice(idx + 1)]
       }
     });
   };
@@ -103,9 +98,8 @@ export default class App extends Component {
       const idx = tasksData.findIndex(obj => obj.id === id);
       const [item] = tasksData.slice(idx);
       item.editStatus = true;
-      const newArr = [...tasksData.slice(0, idx), item, ...tasksData.slice(idx + 1)];
       return {
-        tasksData: newArr
+        tasksData: [...tasksData.slice(0, idx), item, ...tasksData.slice(idx + 1)]
       }
     });
   }
@@ -116,9 +110,8 @@ export default class App extends Component {
       const [item] = tasksData.slice(idx);
       item.description = text;
       item.editStatus = false;
-      const newArr = [...tasksData.slice(0, idx), item, ...tasksData.slice(idx + 1)];
       return {
-        tasksData: newArr
+        tasksData: [...tasksData.slice(0, idx), item, ...tasksData.slice(idx + 1)]
       }
     })
   }
@@ -126,18 +119,16 @@ export default class App extends Component {
   deleteTask = (id) => {
     this.setState(({ tasksData }) => {
       const idx = tasksData.findIndex(obj => obj.id === id);
-      const newArr = [...tasksData.slice(0, idx), ...tasksData.slice(idx + 1)]
       return {
-        tasksData: newArr
+        tasksData: [...tasksData.slice(0, idx), ...tasksData.slice(idx + 1)]
       };
     });
   }
 
   deleteAllDoneTasks = () => {
     this.setState(({ tasksData }) => {
-      const unDoneTasks = tasksData.filter(obj => !obj.doneStatus);
       return {
-        tasksData: unDoneTasks
+        tasksData: tasksData.filter(obj => !obj.doneStatus)
       };
     });
   };

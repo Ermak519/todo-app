@@ -20,6 +20,7 @@ const TasksFilter = ({ btnFiltersStatus, onFilter }) => {
 
     );
 };
+
 TasksFilter.defaultProps = {
     btnFiltersStatus: [],
     onFilter: () => { },
