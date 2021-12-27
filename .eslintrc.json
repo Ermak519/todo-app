@@ -3,12 +3,16 @@
         "airbnb",
         "airbnb/hooks",
         "eslint-config-prettier",
-        "prettier/react"
+        "prettier"
     ],
     "plugins": [
         "react"
     ],
-    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaVersion": 8,
+        "requireConfigFile": false
+    },
+    "parser": "@babel/eslint-parser",
     "env": {
         "browser": true,
         "jest": true
