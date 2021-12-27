@@ -8,10 +8,7 @@
     "plugins": [
         "react"
     ],
-    "parserOptions": {
-        "requireConfigFile": false
-    },
-    "parser": "@babel/eslint-parser",
+    "parser": "react-scripts/node_modules/babel-eslint",
     "env": {
         "browser": true,
         "jest": true
