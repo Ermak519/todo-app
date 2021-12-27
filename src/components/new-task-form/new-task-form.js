@@ -14,15 +14,13 @@ export default class NewTaskForm extends Component {
     }
 
     onSubmit = (e) => {
-        this.setState(() => {
-            e.preventDefault();
-            if (this.state.label !== 0) {
-                this.props.onAddTask(this.state.label);
-                this.setState({
-                    label: ''
-                });
-            };
-        });
+        e.preventDefault();
+        if (this.state.label !== 0) {
+            this.props.onAddTask(this.state.label);
+            this.setState({
+                label: ''
+            });
+        };
     }
 
     render() {
