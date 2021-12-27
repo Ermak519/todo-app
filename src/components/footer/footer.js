@@ -1,8 +1,9 @@
+import React from "react"
 import PropTypes from "prop-types"
 import TasksFilter from '../tasks-filter'
 import './footer.css'
 
-const Footer = ({ count, btnFiltersStatus, onFilter, onDeleteDoneTasks }) => {
+function Footer({ count, btnFiltersStatus, onFilter, onDeleteDoneTasks }) {
 
     return (
         <>

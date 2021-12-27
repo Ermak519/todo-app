@@ -18,6 +18,8 @@
         "jest": true
     },
     "rules": {
+        "import/no-named-as-default": 0,
+        "import/no-named-as-default-member": 0,
         "curly": [
             "error"
         ],
@@ -64,7 +66,16 @@
         "react/jsx-props-no-spreading": [
             "off"
         ],
-        "react/static-property-placement": "off"
+        "react/static-property-placement": "off",
+        "react/jsx-filename-extension": [
+            1,
+            {
+                "extensions": [
+                    ".js",
+                    ".jsx"
+                ]
+            }
+        ]
     },
     "settings": {
         "react": {

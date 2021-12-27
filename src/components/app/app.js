@@ -4,9 +4,8 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
 import NewTaskForm from '../new-task-form'
 import TaskList from "../task-list";
-
 import './app.css';
-//разобраться с ошибкой при добавлении таски
+
 export default class App extends Component {
 
   state = {
@@ -58,11 +57,11 @@ export default class App extends Component {
   toggleFilterTasks = (posts, filter) => {
     switch (filter) {
       case 'active':
-        return posts.filter((obj) => { return !obj.doneStatus });
+        return posts.filter(obj => !obj.doneStatus);
       case 'completed':
-        return posts.filter((obj) => { return obj.doneStatus });
+        return posts.filter(obj => obj.doneStatus);
       default:
-        return posts.filter((obj) => { return obj })
+        return posts.filter(obj => obj)
     }
   }
 

@@ -1,5 +1,5 @@
 import PropTypes from "prop-types"
-import { Component } from 'react';
+import React, { Component } from 'react';
 
 import './task.css'
 
@@ -57,7 +57,6 @@ Task.defaultProps = {
     onEditTask: () => { },
     onDeleteTask: () => { },
     id: 0,
-    onFilter: () => { },
     createDate: '1999 date'
 }
 
@@ -69,6 +68,5 @@ Task.propTypes = {
     onEditTask: PropTypes.func,
     onDeleteTask: PropTypes.func,
     id: PropTypes.number,
-    onFilter: PropTypes.func,
     createDate: PropTypes.string,
 }
