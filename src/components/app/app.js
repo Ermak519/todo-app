@@ -125,11 +125,9 @@ export default class App extends Component {
   }
 
   deleteAllDoneTasks = () => {
-    this.setState(({ tasksData }) => {
-      return {
+    this.setState(({ tasksData }) => ({
         tasksData: tasksData.filter(obj => !obj.doneStatus)
-      };
-    });
+      }));
   };
 
   render() {

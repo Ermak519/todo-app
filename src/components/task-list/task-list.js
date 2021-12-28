@@ -6,7 +6,7 @@ import Footer from '../footer';
 
 import './task-list.css'
 
-const TaskList = ({ tasksData, onDoneTask, onEditTask, onDeleteTask, onConfirmEditingTask, count, btnFiltersStatus, onFilter, onDeleteDoneTasks }) => {
+function TaskList({ tasksData, onDoneTask, onEditTask, onDeleteTask, onConfirmEditingTask, count, btnFiltersStatus, onFilter, onDeleteDoneTasks }) {
 
   const arrTasks = tasksData.map((obj) => {
     const { id, ...data } = obj;
@@ -17,7 +17,7 @@ const TaskList = ({ tasksData, onDoneTask, onEditTask, onDeleteTask, onConfirmEd
         onDoneTask={() => { onDoneTask(id) }}
         onEditTask={() => { onEditTask(id) }}
         onDeleteTask={() => { onDeleteTask(id) }}
-        onConfirmEditingTask={(id, text) => { onConfirmEditingTask(id, text) }}
+        onConfirmEditingTask={(idx, text) => { onConfirmEditingTask(idx, text) }}
         id={id}
         key={id} />
     );
@@ -35,7 +35,7 @@ const TaskList = ({ tasksData, onDoneTask, onEditTask, onDeleteTask, onConfirmEd
         count={count} />
     </section>
   );
-};
+}
 
 TaskList.defaultProps = {
   tasksData: [],
@@ -50,13 +50,13 @@ TaskList.defaultProps = {
 }
 
 TaskList.propTypes = {
-  tasksData: PropTypes.array,
+  tasksData: PropTypes.shape([]),
   onDoneTask: PropTypes.func,
   onEditTask: PropTypes.func,
   onDeleteTask: PropTypes.func,
   onConfirmEditingTask: PropTypes.func,
   count: PropTypes.number,
-  btnFiltersStatus: PropTypes.array,
+  btnFiltersStatus: PropTypes.shape([]),
   onFilter: PropTypes.func,
   onDeleteDoneTasks: PropTypes.func,
 }

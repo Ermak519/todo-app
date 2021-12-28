@@ -10,7 +10,10 @@
     ],
     "parserOptions": {
         "ecmaVersion": 8,
-        "requireConfigFile": false
+        "requireConfigFile": false,
+        "babelOptions": {
+            "presets": ["@babel/preset-react"]
+        }
     },
     "parser": "@babel/eslint-parser",
     "env": {

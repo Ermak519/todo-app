@@ -6,8 +6,7 @@ import './footer.css'
 function Footer({ count, btnFiltersStatus, onFilter, onDeleteDoneTasks }) {
 
     return (
-        <>
-            <footer className="footer">
+        <footer className="footer">
                 <span className="todo-count">{count} items left</span>
                 <ul className="filters">
                     <TasksFilter
@@ -16,9 +15,9 @@ function Footer({ count, btnFiltersStatus, onFilter, onDeleteDoneTasks }) {
                 </ul>
                 <button
                     className="clear-completed"
-                    onClick={onDeleteDoneTasks}>Clear completed</button>
+                    onClick={onDeleteDoneTasks}
+                    type="button">Clear completed</button>
             </footer>
-        </>
     )
 }
 
@@ -31,7 +30,7 @@ Footer.defaultProps = {
 
 Footer.propTypes = {
     count: PropTypes.number,
-    btnFiltersStatus: PropTypes.array,
+    btnFiltersStatus: PropTypes.shape([]),
     onFilter: PropTypes.func,
     onDeleteDoneTasks: PropTypes.func
 }

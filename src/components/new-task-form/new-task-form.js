@@ -7,16 +7,18 @@ export default class NewTaskForm extends Component {
         label: ''
     }
 
-    onLabelChange = (e) => {
+    onLabelChange = (event) => {
         this.setState({
-            label: e.target.value
+            label: event.target.value
         })
     }
 
-    onSubmit = (e) => {
-        e.preventDefault();
-        if (this.state.label !== 0) {
-            this.props.onAddTask(this.state.label);
+    onSubmit = (event) => {
+        const {onAddTask} = this.props;
+        const {label} = this.state
+        event.preventDefault();
+        if (label !== 0) {
+            onAddTask(label);
             this.setState({
                 label: ''
             });
@@ -24,16 +26,15 @@ export default class NewTaskForm extends Component {
     }
 
     render() {
+        const {label} = this.state
         return (
-            <>
-                <form onSubmit={this.onSubmit}>
+            <form onSubmit={this.onSubmit}>
                     <input
                         className="new-todo"
                         placeholder="What needs to be done?"
                         onChange={this.onLabelChange}
-                        value={this.state.label} />
+                        value={label} />
                 </form>
-            </>
         );
     }
 }

@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import './tasks-filter.css'
 
-const TasksFilter = ({ btnFiltersStatus, onFilter }) => {
+function TasksFilter({ btnFiltersStatus, onFilter }) {
     const arr = btnFiltersStatus.map((obj) => {
         let classBtn = ''
         if (obj.status) classBtn = 'selected'
@@ -10,17 +10,13 @@ const TasksFilter = ({ btnFiltersStatus, onFilter }) => {
             <li key={obj.id}>
                 <button
                     className={classBtn}
-                    onClick={() => { onFilter(obj.id) }}>{obj.descr}</button>
+                    onClick={() => { onFilter(obj.id) }}
+                    type="button">{obj.descr}</button>
             </li>
         );
     })
-    return (
-        <>
-            {arr}
-        </>
-
-    );
-};
+    return {arr};
+}
 
 TasksFilter.defaultProps = {
     btnFiltersStatus: [],
@@ -28,7 +24,7 @@ TasksFilter.defaultProps = {
 }
 
 TasksFilter.propTypes = {
-    btnFiltersStatus: PropTypes.array,
+    btnFiltersStatus: PropTypes.shape([]),
     onFilter: PropTypes.func,
 }
 
