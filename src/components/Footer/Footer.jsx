@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TasksFilter from '../tasks-filter';
-import './footer.css';
+import TasksFilter from '../TasksFilter';
+import './Footer.scss';
 
-function Footer({ count, btnFiltersStatus, onFilter, onDeleteDoneTasks }) {
+export default function Footer({ count, btnFiltersStatus, onFilter, onDeleteDoneTasks }) {
   return (
     <footer className="footer">
       <span className="todo-count">{count} items left</span>
@@ -30,5 +30,3 @@ Footer.propTypes = {
   onFilter: PropTypes.func,
   onDeleteDoneTasks: PropTypes.func,
 };
-
-export default Footer;

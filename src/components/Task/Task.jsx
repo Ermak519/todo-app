@@ -1,13 +1,16 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-import './task.css';
+import './Task.scss';
 
 export default class Task extends Component {
-  state = {
-    // eslint-disable-next-line react/destructuring-assignment
-    label: this.props.description,
-  };
+  constructor(props){
+    super(props);
+    this.state = {
+      // eslint-disable-next-line react/destructuring-assignment
+      label: this.props.description,
+    };
+  }
 
   changeDescr = (event) => {
     this.setState({

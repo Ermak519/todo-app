@@ -2,42 +2,45 @@ import React, { Component } from 'react';
 
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
-import NewTaskForm from '../new-task-form';
-import TaskList from '../task-list';
-import './app.css';
+import NewTaskForm from '../NewTaskForm';
+import TaskList from '../TaskList';
+import './App.scss';
 
 export default class App extends Component {
-  state = {
-    tasksData: [
-      {
-        id: 1,
-        description: 'Completed task',
-        doneStatus: false,
-        editStatus: false,
-        createDate: formatDistanceToNow(new Date(2021, 9, 2), { addSuffix: true }),
-      },
-      {
-        id: 2,
-        description: 'Editing task',
-        doneStatus: false,
-        editStatus: false,
-        createDate: formatDistanceToNow(new Date(2021, 11, 2), { addSuffix: true }),
-      },
-      {
-        id: 3,
-        description: 'Active task',
-        doneStatus: false,
-        editStatus: false,
-        createDate: formatDistanceToNow(new Date(2021, 6, 2), { addSuffix: true }),
-      },
-    ],
-    btnStatus: [
-      { id: 1, descr: 'All', status: true },
-      { id: 2, descr: 'Active', status: false },
-      { id: 3, descr: 'Completed', status: false },
-    ],
-    filterStatus: 'all',
-  };
+  constructor(props){
+    super(props)
+    this.state = {
+      tasksData: [
+        {
+          id: 1,
+          description: 'Completed task',
+          doneStatus: false,
+          editStatus: false,
+          createDate: formatDistanceToNow(new Date(2021, 9, 2), { addSuffix: true }),
+        },
+        {
+          id: 2,
+          description: 'Editing task',
+          doneStatus: false,
+          editStatus: false,
+          createDate: formatDistanceToNow(new Date(2021, 11, 2), { addSuffix: true }),
+        },
+        {
+          id: 3,
+          description: 'Active task',
+          doneStatus: false,
+          editStatus: false,
+          createDate: formatDistanceToNow(new Date(2021, 6, 2), { addSuffix: true }),
+        },
+      ],
+      btnStatus: [
+        { id: 1, descr: 'All', status: true },
+        { id: 2, descr: 'Active', status: false },
+        { id: 3, descr: 'Completed', status: false },
+      ],
+      filterStatus: 'all',
+    };
+  }
 
   filterTasks = (id) => {
     this.setState(({ btnStatus }) => {

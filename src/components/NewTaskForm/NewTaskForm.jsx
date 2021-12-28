@@ -1,11 +1,14 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import './new-task-form.css';
+import './NewTaskForm.scss';
 
 export default class NewTaskForm extends Component {
-  state = {
-    label: '',
-  };
+  constructor(props){
+    super(props);
+    this.state = {
+      label: '',
+    };
+  }
 
   onLabelChange = (event) => {
     this.setState({

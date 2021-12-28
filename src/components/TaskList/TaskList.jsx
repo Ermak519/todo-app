@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Task from '../task';
-import Footer from '../footer';
+import Task from '../Task';
+import Footer from '../Footer';
 
-import './task-list.css';
+import './TaskList.scss';
 
-function TaskList({
+export default function TaskList({
   tasksData,
   onDoneTask,
   onEditTask,
@@ -77,5 +77,3 @@ TaskList.propTypes = {
   onFilter: PropTypes.func,
   onDeleteDoneTasks: PropTypes.func,
 };
-
-export default TaskList;

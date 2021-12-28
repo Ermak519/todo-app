@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './tasks-filter.css';
+import './TasksFilter.scss';
 
-function TasksFilter({ btnFiltersStatus, onFilter }) {
+export default function TasksFilter({ btnFiltersStatus, onFilter }) {
   return btnFiltersStatus.map((obj) => {
     let classBtn = '';
     if (obj.status) classBtn = 'selected';
@@ -32,4 +32,3 @@ TasksFilter.propTypes = {
   onFilter: PropTypes.func,
 };
 
-export default TasksFilter;
