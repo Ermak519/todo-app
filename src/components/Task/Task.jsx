@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import './Task.scss';
 
 export default class Task extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       // eslint-disable-next-line react/destructuring-assignment

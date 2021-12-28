@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import './NewTaskForm.scss';
 
 export default class NewTaskForm extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       label: '',

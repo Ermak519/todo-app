@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TasksFilter from '../TasksFilter/TasksFilter.jsx';
+import { TasksFilter } from '../TasksFilter';
 import './Footer.scss';
 
 export default function Footer({ count, btnFiltersStatus, onFilter, onDeleteDoneTasks }) {

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Task from '../Task/Task.jsx';
-import Footer from '../Footer/Footer.jsx';
+import { Footer } from '../Footer';
 
 import './TaskList.scss';
 

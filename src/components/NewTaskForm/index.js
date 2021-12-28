@@ -1,1 +1,1 @@
-export {default as NewTaskForm} from './NewTaskForm.jsx';
+export { default as NewTaskForm } from './NewTaskForm.jsx';

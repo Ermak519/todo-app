@@ -1,1 +1,1 @@
-export {default as TasksFilter} from './TasksFilter.jsx';
+export { default as TasksFilter } from './TasksFilter.jsx';

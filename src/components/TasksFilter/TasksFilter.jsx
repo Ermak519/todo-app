@@ -31,4 +31,3 @@ TasksFilter.propTypes = {
   btnFiltersStatus: PropTypes.arrayOf(PropTypes.object),
   onFilter: PropTypes.func,
 };
-

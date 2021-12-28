@@ -3,12 +3,12 @@ import React, { Component } from 'react';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
 import NewTaskForm from '../NewTaskForm/NewTaskForm.jsx';
-import TaskList from '../TaskList/TaskList.jsx';
+import { TaskList } from '../TaskList';
 import './App.scss';
 
 export default class App extends Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       tasksData: [
         {
