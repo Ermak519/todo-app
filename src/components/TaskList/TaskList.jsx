@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Task from '../Task';
-import Footer from '../Footer';
+import Task from '../Task/Task.jsx';
+import Footer from '../Footer/Footer.jsx';
 
 import './TaskList.scss';
 

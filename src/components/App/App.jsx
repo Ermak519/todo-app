@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
-import NewTaskForm from '../NewTaskForm';
-import TaskList from '../TaskList';
+import NewTaskForm from '../NewTaskForm/NewTaskForm.jsx';
+import TaskList from '../TaskList/TaskList.jsx';
 import './App.scss';
 
 export default class App extends Component {
