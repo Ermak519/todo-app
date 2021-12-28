@@ -20,7 +20,9 @@
     "eject": "react-scripts eject",
     "lint": "eslint ./src",
     "lint:fix": "eslint ./src --fix",
-    "format": "prettier"
+    "format:check": "prettier --check ./src",
+    "format:list": "prettier --list-different ./src",
+    "format": "prettier --write ./src"
   },
   "eslintConfig": {
     "extends": [
