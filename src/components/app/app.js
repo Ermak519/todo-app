@@ -43,9 +43,9 @@ export default class App extends Component {
     this.setState(({ btnStatus }) => {
       const idx = btnStatus.findIndex((obj) => obj.id === id);
       const arr = [...btnStatus];
-      // eslint-disable-next-line no-param-reassign
       arr.forEach((obj) => {
-        obj.status = false;
+        const elem = obj;
+        elem.status = false;
       });
       const item = arr[idx];
       item.status = true;
