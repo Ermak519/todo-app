@@ -17,29 +17,27 @@ export default function TaskList({
   onFilter,
   onDeleteDoneTasks,
 }) {
-  const arrTasks = tasksData.map((obj) => {
-    const { id, ...data } = obj;
-
-    return (
-      <Task
-        {...data}
-        onDoneTask={() => {
-          onDoneTask(id);
-        }}
-        onEditTask={() => {
-          onEditTask(id);
-        }}
-        onDeleteTask={() => {
-          onDeleteTask(id);
-        }}
-        onConfirmEditingTask={(idx, text) => {
-          onConfirmEditingTask(idx, text);
-        }}
-        id={id}
-        key={id}
-      />
-    );
-  });
+  const arrTasks = tasksData.map(obj =>
+    <Task
+      descr={obj.description}
+      status={obj.status}
+      date={obj.createDate}
+      onDoneTask={() => {
+        onDoneTask(obj.id);
+      }}
+      onEditTask={() => {
+        onEditTask(obj.id);
+      }}
+      onDeleteTask={() => {
+        onDeleteTask(obj.id);
+      }}
+      onConfirmEditingTask={(idx, text) => {
+        onConfirmEditingTask(idx, text);
+      }}
+      id={obj.id}
+      key={`${obj.description}-${obj.createDate}`}
+    />
+  );
 
   return (
     <section className="main">
@@ -56,14 +54,14 @@ export default function TaskList({
 
 TaskList.defaultProps = {
   tasksData: [],
-  onDoneTask: () => {},
-  onEditTask: () => {},
-  onDeleteTask: () => {},
-  onConfirmEditingTask: () => {},
+  onDoneTask: () => { },
+  onEditTask: () => { },
+  onDeleteTask: () => { },
+  onConfirmEditingTask: () => { },
   count: 0,
   btnFiltersStatus: [],
-  onFilter: () => {},
-  onDeleteDoneTasks: () => {},
+  onFilter: () => { },
+  onDeleteDoneTasks: () => { },
 };
 
 TaskList.propTypes = {

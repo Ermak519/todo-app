@@ -12,7 +12,9 @@
         "ecmaVersion": 8,
         "requireConfigFile": false,
         "babelOptions": {
-            "presets": ["@babel/preset-react"]
+            "presets": [
+                "@babel/preset-react"
+            ]
         }
     },
     "parser": "@babel/eslint-parser",
@@ -21,14 +23,15 @@
         "jest": true
     },
     "rules": {
+        "jsx-a11y/no-autofocus": 0,
         "import/extensions": [
             "error",
             "ignorePackages",
             {
-              "js": "never",
-              "jsx": "always"
+                "js": "never",
+                "jsx": "always"
             }
-         ],
+        ],
         "import/prefer-default-export": "off",
         "import/no-named-as-default": 0,
         "import/no-named-as-default-member": 0,

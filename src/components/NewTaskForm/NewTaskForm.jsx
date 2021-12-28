@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 import './NewTaskForm.scss';
 
 export default class NewTaskForm extends Component {
-  constructor(props) {
-    super(props);
+  constructor({ onAddTask }) {
+    super();
+    this.onAddTask = onAddTask;
     this.state = {
       label: '',
     };
@@ -17,11 +18,10 @@ export default class NewTaskForm extends Component {
   };
 
   onSubmit = (event) => {
-    const { onAddTask } = this.props;
     const { label } = this.state;
     event.preventDefault();
-    if (label !== 0) {
-      onAddTask(label);
+    if (label !== '') {
+      this.onAddTask(label);
       this.setState({
         label: '',
       });
@@ -39,7 +39,7 @@ export default class NewTaskForm extends Component {
 }
 
 NewTaskForm.defaultProps = {
-  onAddTask: () => {},
+  onAddTask: () => { },
 };
 
 NewTaskForm.propTypes = {

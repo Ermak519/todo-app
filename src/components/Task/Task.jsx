@@ -4,11 +4,14 @@ import React, { Component } from 'react';
 import './Task.scss';
 
 export default class Task extends Component {
-  constructor(props) {
-    super(props);
+  constructor({ onConfirmEditingTask, id, descr }) {
+    super();
+    this.onConfirmEditingTask = onConfirmEditingTask;
+    this.id = id;
+    this.descr = descr;
+
     this.state = {
-      // eslint-disable-next-line react/destructuring-assignment
-      label: this.props.description,
+      label: this.descr,
     };
   }
 
@@ -19,32 +22,39 @@ export default class Task extends Component {
   };
 
   onSubmit = (event) => {
-    const { onConfirmEditingTask, id } = this.props;
     const { label } = this.state;
     event.preventDefault();
-    onConfirmEditingTask(id, label);
+    this.onConfirmEditingTask(this.id, label);
   };
 
   render() {
-    const { description, doneStatus, editStatus, onDoneTask, onEditTask, onDeleteTask, createDate } = this.props;
+    const { descr, status, date, onDoneTask, onEditTask, onDeleteTask } = this.props
     const { label } = this.state;
     let taskState = '';
-    if (doneStatus) taskState = 'completed';
-    if (editStatus) taskState = 'editing';
+    switch (status) {
+      case 'completed':
+        taskState = 'completed';
+        break;
+      case 'editing':
+        taskState = 'editing';
+        break;
+      default:
+        taskState = 'active';
+    }
 
     return (
       <li className={taskState}>
         <div className="view">
-          <input className="toggle" type="checkbox" onClick={onDoneTask} defaultChecked={doneStatus} />
-          <label>
-            <span className="description">{description}</span>
-            <span className="created">created {createDate}</span>
+          <input id={descr} className="toggle" type="checkbox" onClick={onDoneTask} />
+          <label htmlFor={descr} >
+            <span className="description">{descr}</span>
+            <span className="created">created {date}</span>
           </label>
           <button className="icon icon-edit" onClick={onEditTask} type="button" aria-label="Edit Task" />
           <button className="icon icon-destroy" onClick={onDeleteTask} type="button" aria-label="Edit Task" />
         </div>
         <form onSubmit={this.onSubmit}>
-          <input type="text" className="edit" value={label} onChange={this.changeDescr} />
+          <input id={descr} type="text" className="edit" value={label} autoFocus tabIndex={this.id} onChange={this.changeDescr} />
         </form>
       </li>
     );
@@ -52,25 +62,23 @@ export default class Task extends Component {
 }
 
 Task.defaultProps = {
-  description: 'error',
-  doneStatus: false,
-  editStatus: false,
-  onDoneTask: () => {},
-  onEditTask: () => {},
-  onDeleteTask: () => {},
-  onConfirmEditingTask: () => {},
+  descr: 'error',
+  status: 'active',
+  onDoneTask: () => { },
+  onEditTask: () => { },
+  onDeleteTask: () => { },
+  onConfirmEditingTask: () => { },
   id: 0,
-  createDate: '1999 date',
+  date: '1999 date',
 };
 
 Task.propTypes = {
-  description: PropTypes.string,
+  descr: PropTypes.string,
   onConfirmEditingTask: PropTypes.func,
-  doneStatus: PropTypes.bool,
-  editStatus: PropTypes.bool,
+  status: PropTypes.string,
   onDoneTask: PropTypes.func,
   onEditTask: PropTypes.func,
   onDeleteTask: PropTypes.func,
   id: PropTypes.number,
-  createDate: PropTypes.string,
+  date: PropTypes.string,
 };

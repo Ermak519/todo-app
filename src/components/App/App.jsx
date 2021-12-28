@@ -14,22 +14,19 @@ export default class App extends Component {
         {
           id: 1,
           description: 'Completed task',
-          doneStatus: false,
-          editStatus: false,
+          status: 'active',
           createDate: formatDistanceToNow(new Date(2021, 9, 2), { addSuffix: true }),
         },
         {
           id: 2,
           description: 'Editing task',
-          doneStatus: false,
-          editStatus: false,
-          createDate: formatDistanceToNow(new Date(2021, 11, 2), { addSuffix: true }),
+          status: 'active',
+          createDate: formatDistanceToNow(new Date(2020, 11, 2), { addSuffix: true }),
         },
         {
           id: 3,
           description: 'Active task',
-          doneStatus: false,
-          editStatus: false,
+          status: 'active',
           createDate: formatDistanceToNow(new Date(2021, 6, 2), { addSuffix: true }),
         },
       ],
@@ -42,7 +39,7 @@ export default class App extends Component {
     };
   }
 
-  filterTasks = (id) => {
+  onFilterTasks = (id) => {
     this.setState(({ btnStatus }) => {
       const idx = btnStatus.findIndex((obj) => obj.id === id);
       const arr = [...btnStatus];
@@ -62,22 +59,21 @@ export default class App extends Component {
   toggleFilterTasks = (posts, filter) => {
     switch (filter) {
       case 'active':
-        return posts.filter((obj) => !obj.doneStatus);
+        return posts.filter((obj) => obj.status === 'active');
       case 'completed':
-        return posts.filter((obj) => obj.doneStatus);
+        return posts.filter((obj) => obj.status === 'completed');
       default:
         return posts.filter((obj) => obj);
     }
   };
 
-  addTask = (text) => {
+  onAddTask = (text) => {
     this.setState(({ tasksData }) => {
       const lastId = tasksData.length + 1;
       const newItem = {
         id: lastId,
         description: text,
-        doneStatus: false,
-        editStatus: false,
+        status: 'active',
         createDate: formatDistanceToNow(new Date(), { addSuffix: true }),
       };
       return {
@@ -86,41 +82,48 @@ export default class App extends Component {
     });
   };
 
-  doneTask = (id) => {
+  toggleCompletedTask = (status) => {
+    if (status === 'active') {
+      return 'completed'
+    }
+    return 'active'
+  }
+
+  onDoneTask = (id) => {
     this.setState(({ tasksData }) => {
       const idx = tasksData.findIndex((obj) => obj.id === id);
       const [item] = tasksData.slice(idx);
-      item.doneStatus = !item.doneStatus;
+      item.status = this.toggleCompletedTask(item.status);
       return {
         tasksData: [...tasksData.slice(0, idx), item, ...tasksData.slice(idx + 1)],
       };
     });
   };
 
-  editTask = (id) => {
+  onEditTask = (id) => {
     this.setState(({ tasksData }) => {
       const idx = tasksData.findIndex((obj) => obj.id === id);
       const [item] = tasksData.slice(idx);
-      item.editStatus = true;
+      item.status = 'editing';
       return {
         tasksData: [...tasksData.slice(0, idx), item, ...tasksData.slice(idx + 1)],
       };
     });
   };
 
-  confirmEditingTask = (id, text) => {
+  onConfirmEditingTask = (id, text) => {
     this.setState(({ tasksData }) => {
       const idx = tasksData.findIndex((obj) => obj.id === id);
       const [item] = tasksData.slice(idx);
       item.description = text;
-      item.editStatus = false;
+      item.status = 'active';
       return {
         tasksData: [...tasksData.slice(0, idx), item, ...tasksData.slice(idx + 1)],
       };
     });
   };
 
-  deleteTask = (id) => {
+  onDeleteTask = (id) => {
     this.setState(({ tasksData }) => {
       const idx = tasksData.findIndex((obj) => obj.id === id);
       return {
@@ -129,15 +132,15 @@ export default class App extends Component {
     });
   };
 
-  deleteAllDoneTasks = () => {
+  onDeleteAllDoneTasks = () => {
     this.setState(({ tasksData }) => ({
-      tasksData: tasksData.filter((obj) => !obj.doneStatus),
+      tasksData: tasksData.filter((obj) => obj.status !== 'completed'),
     }));
   };
 
   render() {
     const { tasksData, btnStatus, filterStatus } = this.state;
-    const doneCount = tasksData.filter((obj) => obj.doneStatus).length;
+    const doneCount = tasksData.filter((obj) => obj.status === 'completed').length;
     const allCount = tasksData.length - doneCount;
     const posts = this.toggleFilterTasks(tasksData, filterStatus);
 
@@ -145,18 +148,18 @@ export default class App extends Component {
       <section className="todoapp">
         <header className="header">
           <h1>todos</h1>
-          <NewTaskForm onAddTask={this.addTask} allTasks={tasksData} />
+          <NewTaskForm onAddTask={this.onAddTask} allTasks={tasksData} />
         </header>
         <TaskList
           tasksData={posts}
-          onDoneTask={this.doneTask}
-          onEditTask={this.editTask}
-          onConfirmEditingTask={this.confirmEditingTask}
-          onDeleteTask={this.deleteTask}
+          onDoneTask={this.onDoneTask}
+          onEditTask={this.onEditTask}
+          onConfirmEditingTask={this.onConfirmEditingTask}
+          onDeleteTask={this.onDeleteTask}
           count={allCount}
           btnFiltersStatus={btnStatus}
-          onFilter={this.filterTasks}
-          onDeleteDoneTasks={this.deleteAllDoneTasks}
+          onFilter={this.onFilterTasks}
+          onDeleteDoneTasks={this.onDeleteAllDoneTasks}
         />
       </section>
     );
