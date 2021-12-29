@@ -17,7 +17,7 @@ export default function TaskList({
   onFilterTasks,
   onDeleteDoneTasks,
 }) {
-  const arrTasks = tasksData.map((obj, i) =>
+  const arrTasks = tasksData.map((obj, i) => (
     <Task
       descr={obj.description}
       status={obj.status}
@@ -35,9 +35,9 @@ export default function TaskList({
         onConfirmEditingTask(idx, text);
       }}
       id={i}
-      key={`${obj.description}-${obj.createDate}_${Math.random()+i}`}
+      key={`${obj.description}-${obj.createDate}_${Math.random() + i}`}
     />
-  );
+  ));
 
   return (
     <section className="main">
@@ -54,14 +54,14 @@ export default function TaskList({
 
 TaskList.defaultProps = {
   tasksData: [],
-  onDoneTask: () => { },
-  onEditTask: () => { },
-  onDeleteTask: () => { },
-  onConfirmEditingTask: () => { },
+  onDoneTask: () => {},
+  onEditTask: () => {},
+  onDeleteTask: () => {},
+  onConfirmEditingTask: () => {},
   count: 0,
   btnFiltersStatus: [],
-  onFilterTasks: () => { },
-  onDeleteDoneTasks: () => { },
+  onFilterTasks: () => {},
+  onDeleteDoneTasks: () => {},
 };
 
 TaskList.propTypes = {
