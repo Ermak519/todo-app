@@ -20,7 +20,7 @@ export default class NewTaskForm extends Component {
   onSubmit = (event) => {
     const { label } = this.state;
     event.preventDefault();
-    if (label !== '') {
+    if (label.trim() !== '') {
       this.onAddTask(label);
       this.setState({
         label: '',

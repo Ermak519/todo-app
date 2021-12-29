@@ -14,28 +14,28 @@ export default function TaskList({
   onConfirmEditingTask,
   count,
   btnFiltersStatus,
-  onFilter,
+  onFilterTasks,
   onDeleteDoneTasks,
 }) {
-  const arrTasks = tasksData.map(obj =>
+  const arrTasks = tasksData.map((obj, i) =>
     <Task
       descr={obj.description}
       status={obj.status}
       date={obj.createDate}
       onDoneTask={() => {
-        onDoneTask(obj.id);
+        onDoneTask(i);
       }}
       onEditTask={() => {
-        onEditTask(obj.id);
+        onEditTask(i);
       }}
       onDeleteTask={() => {
-        onDeleteTask(obj.id);
+        onDeleteTask(i);
       }}
       onConfirmEditingTask={(idx, text) => {
         onConfirmEditingTask(idx, text);
       }}
-      id={obj.id}
-      key={`${obj.description}-${obj.createDate}`}
+      id={i}
+      key={`${obj.description}-${obj.createDate}_${Math.random()+i}`}
     />
   );
 
@@ -44,7 +44,7 @@ export default function TaskList({
       <ul className="todo-list">{arrTasks}</ul>
       <Footer
         btnFiltersStatus={btnFiltersStatus}
-        onFilter={onFilter}
+        onFilterTasks={onFilterTasks}
         onDeleteDoneTasks={onDeleteDoneTasks}
         count={count}
       />
@@ -60,7 +60,7 @@ TaskList.defaultProps = {
   onConfirmEditingTask: () => { },
   count: 0,
   btnFiltersStatus: [],
-  onFilter: () => { },
+  onFilterTasks: () => { },
   onDeleteDoneTasks: () => { },
 };
 
@@ -72,6 +72,6 @@ TaskList.propTypes = {
   onConfirmEditingTask: PropTypes.func,
   count: PropTypes.number,
   btnFiltersStatus: PropTypes.arrayOf(PropTypes.object),
-  onFilter: PropTypes.func,
+  onFilterTasks: PropTypes.func,
   onDeleteDoneTasks: PropTypes.func,
 };

@@ -45,16 +45,23 @@ export default class Task extends Component {
     return (
       <li className={taskState}>
         <div className="view">
-          <input id={descr} className="toggle" type="checkbox" onClick={onDoneTask} />
+          <input id={descr} className="toggle" type="checkbox" onClick={onDoneTask} defaultChecked={taskState !== 'active'}/>
           <label htmlFor={descr} >
             <span className="description">{descr}</span>
             <span className="created">created {date}</span>
           </label>
           <button className="icon icon-edit" onClick={onEditTask} type="button" aria-label="Edit Task" />
-          <button className="icon icon-destroy" onClick={onDeleteTask} type="button" aria-label="Edit Task" />
+          <button className="icon icon-destroy" onClick={onDeleteTask} type="button" aria-label="Delete Task" />
         </div>
         <form onSubmit={this.onSubmit}>
-          <input id={descr} type="text" className="edit" value={label} autoFocus tabIndex={this.id} onChange={this.changeDescr} />
+          <input 
+            autoFocus
+            id={descr} 
+            type="text" 
+            className="edit" 
+            value={label}  
+            tabIndex={this.id} 
+            onChange={this.changeDescr} />
         </form>
       </li>
     );

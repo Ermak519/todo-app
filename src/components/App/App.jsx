@@ -12,47 +12,41 @@ export default class App extends Component {
     this.state = {
       tasksData: [
         {
-          id: 1,
           description: 'Completed task',
           status: 'active',
           createDate: formatDistanceToNow(new Date(2021, 9, 2), { addSuffix: true }),
         },
         {
-          id: 2,
           description: 'Editing task',
           status: 'active',
           createDate: formatDistanceToNow(new Date(2020, 11, 2), { addSuffix: true }),
         },
         {
-          id: 3,
           description: 'Active task',
           status: 'active',
           createDate: formatDistanceToNow(new Date(2021, 6, 2), { addSuffix: true }),
         },
       ],
       btnStatus: [
-        { id: 1, descr: 'All', status: true },
-        { id: 2, descr: 'Active', status: false },
-        { id: 3, descr: 'Completed', status: false },
+        {descr: 'All', status: 'selected' },
+        {descr: 'Active', status: '' },
+        {descr: 'Completed', status: '' },
       ],
       filterStatus: 'all',
     };
   }
 
   onFilterTasks = (id) => {
-    this.setState(({ btnStatus }) => {
-      const idx = btnStatus.findIndex((obj) => obj.id === id);
-      const arr = [...btnStatus];
-      arr.forEach((obj) => {
-        const elem = obj;
-        elem.status = false;
-      });
-      const item = arr[idx];
-      item.status = true;
-      return {
-        btnStatus: [...arr.slice(0, idx), item, ...arr.slice(idx + 1)],
-        filterStatus: item.descr.toLowerCase(),
-      };
+    const {btnStatus:arr} = this.state
+    arr.forEach((obj) => {
+      const elem = obj;
+      elem.status = '';
+    });
+    const item = arr[id];
+    item.status = 'selected';
+    this.setState({
+      btnStatus: [...arr.slice(0, id), item, ...arr.slice(id + 1)],
+      filterStatus: item.descr.toLowerCase()
     });
   };
 
@@ -68,18 +62,14 @@ export default class App extends Component {
   };
 
   onAddTask = (text) => {
-    this.setState(({ tasksData }) => {
-      const lastId = tasksData.length + 1;
-      const newItem = {
-        id: lastId,
-        description: text,
-        status: 'active',
-        createDate: formatDistanceToNow(new Date(), { addSuffix: true }),
-      };
-      return {
-        tasksData: [...tasksData, newItem],
-      };
-    });
+    const {tasksData:arr} = this.state;
+    const newItem = {
+      id: arr.length + 1,
+      description: text,
+      status: 'active',
+      createDate: formatDistanceToNow(new Date(), { addSuffix: true }),
+    };
+    this.setState({tasksData: [...arr, newItem]});
   };
 
   toggleCompletedTask = (status) => {
@@ -90,46 +80,30 @@ export default class App extends Component {
   }
 
   onDoneTask = (id) => {
-    this.setState(({ tasksData }) => {
-      const idx = tasksData.findIndex((obj) => obj.id === id);
-      const [item] = tasksData.slice(idx);
-      item.status = this.toggleCompletedTask(item.status);
-      return {
-        tasksData: [...tasksData.slice(0, idx), item, ...tasksData.slice(idx + 1)],
-      };
-    });
-  };
+    const {tasksData:arr} = this.state;
+    const item = arr[id];
+    item.status = this.toggleCompletedTask(item.status);
+    this.setState({tasksData: [...arr.slice(0, id), item, ...arr.slice(id + 1)]});
+  }
 
   onEditTask = (id) => {
-    this.setState(({ tasksData }) => {
-      const idx = tasksData.findIndex((obj) => obj.id === id);
-      const [item] = tasksData.slice(idx);
-      item.status = 'editing';
-      return {
-        tasksData: [...tasksData.slice(0, idx), item, ...tasksData.slice(idx + 1)],
-      };
-    });
+    const {tasksData:arr} = this.state;
+    const item = arr[id];
+    item.status = 'editing';
+    this.setState({tasksData: [...arr.slice(0, id), item, ...arr.slice(id + 1)]});
   };
 
   onConfirmEditingTask = (id, text) => {
-    this.setState(({ tasksData }) => {
-      const idx = tasksData.findIndex((obj) => obj.id === id);
-      const [item] = tasksData.slice(idx);
-      item.description = text;
-      item.status = 'active';
-      return {
-        tasksData: [...tasksData.slice(0, idx), item, ...tasksData.slice(idx + 1)],
-      };
-    });
+    const {tasksData:arr} = this.state;
+    const item = arr[id];
+    item.description = text;
+    item.status = 'active';
+    this.setState({tasksData: [...arr.slice(0, id), item, ...arr.slice(id + 1)]});
   };
 
   onDeleteTask = (id) => {
-    this.setState(({ tasksData }) => {
-      const idx = tasksData.findIndex((obj) => obj.id === id);
-      return {
-        tasksData: [...tasksData.slice(0, idx), ...tasksData.slice(idx + 1)],
-      };
-    });
+    const {tasksData:arr} = this.state;
+    this.setState({tasksData: [...arr.slice(0, id), ...arr.slice(id + 1)]});
   };
 
   onDeleteAllDoneTasks = () => {
@@ -138,7 +112,7 @@ export default class App extends Component {
     }));
   };
 
-  render() {
+  render () {
     const { tasksData, btnStatus, filterStatus } = this.state;
     const doneCount = tasksData.filter((obj) => obj.status === 'completed').length;
     const allCount = tasksData.length - doneCount;
@@ -158,10 +132,11 @@ export default class App extends Component {
           onDeleteTask={this.onDeleteTask}
           count={allCount}
           btnFiltersStatus={btnStatus}
-          onFilter={this.onFilterTasks}
+          onFilterTasks={this.onFilterTasks}
           onDeleteDoneTasks={this.onDeleteAllDoneTasks}
         />
       </section>
     );
   }
 }
+
