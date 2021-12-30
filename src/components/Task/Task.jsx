@@ -83,7 +83,7 @@ Task.defaultProps = {
   onDeleteTask: () => {},
   onConfirmEditingTask: () => {},
   id: 0,
-  date: '1999 date',
+  date: '99999999 date',
 };
 
 Task.propTypes = {

@@ -16,12 +16,13 @@ export default function TaskList({
   btnFiltersStatus,
   onFilterTasks,
   onDeleteDoneTasks,
+  showDateOfCreateTask,
 }) {
   const arrTasks = tasksData.map((obj, i) => (
     <Task
       descr={obj.description}
       status={obj.status}
-      date={obj.createDate}
+      date={showDateOfCreateTask(obj.createDate)}
       onDoneTask={() => {
         onDoneTask(i);
       }}
@@ -35,7 +36,7 @@ export default function TaskList({
         onConfirmEditingTask(idx, text);
       }}
       id={i}
-      key={`${obj.description}-${obj.createDate}_${Math.random() + i}`}
+      key={`${obj.description}-${obj.createDate}_${Math.random() + i}_${new Date()}`}
     />
   ));
 
@@ -62,6 +63,7 @@ TaskList.defaultProps = {
   btnFiltersStatus: [],
   onFilterTasks: () => {},
   onDeleteDoneTasks: () => {},
+  showDateOfCreateTask: () => {},
 };
 
 TaskList.propTypes = {
@@ -74,4 +76,5 @@ TaskList.propTypes = {
   btnFiltersStatus: PropTypes.arrayOf(PropTypes.object),
   onFilterTasks: PropTypes.func,
   onDeleteDoneTasks: PropTypes.func,
+  showDateOfCreateTask: PropTypes.func,
 };

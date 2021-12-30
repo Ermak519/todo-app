@@ -14,17 +14,17 @@ export default class App extends Component {
         {
           description: 'Completed task',
           status: 'active',
-          createDate: formatDistanceToNow(new Date(2021, 9, 2), { addSuffix: true }),
+          createDate: '2020-06-02T19:55:11',
         },
         {
           description: 'Editing task',
           status: 'active',
-          createDate: formatDistanceToNow(new Date(2020, 11, 2), { addSuffix: true }),
+          createDate: '2021-11-20T19:55:11',
         },
         {
           description: 'Active task',
           status: 'active',
-          createDate: formatDistanceToNow(new Date(2021, 6, 2), { addSuffix: true }),
+          createDate: '2021-12-30T19:55:11',
         },
       ],
       btnStatus: [
@@ -35,6 +35,8 @@ export default class App extends Component {
       filterStatus: 'all',
     };
   }
+
+  showDateOfCreateTask = (date) => formatDistanceToNow(Date.parse(date), { addSuffix: true });
 
   onFilterTasks = (id) => {
     const { btnStatus: arr } = this.state;
@@ -62,7 +64,7 @@ export default class App extends Component {
       id: arr.length + 1,
       description: text,
       status: 'active',
-      createDate: formatDistanceToNow(new Date(), { addSuffix: true }),
+      createDate: `${new Date()}`,
     };
     this.setState({ tasksData: [...arr, newItem] });
   };
@@ -93,6 +95,8 @@ export default class App extends Component {
     const item = arr[id];
     item.description = text;
     item.status = 'active';
+    const a = item.createDate;
+    item.createDate = a;
     this.setState({ tasksData: [...arr.slice(0, id), item, ...arr.slice(id + 1)] });
   };
 
@@ -129,6 +133,7 @@ export default class App extends Component {
           btnFiltersStatus={btnStatus}
           onFilterTasks={this.onFilterTasks}
           onDeleteDoneTasks={this.onDeleteAllDoneTasks}
+          showDateOfCreateTask={this.showDateOfCreateTask}
         />
       </section>
     );
