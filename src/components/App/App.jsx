@@ -95,8 +95,8 @@ export default class App extends Component {
     const item = arr[id];
     item.description = text;
     item.status = 'active';
-    const a = item.createDate;
-    item.createDate = a;
+    const date = item.createDate;
+    item.createDate = date;
     this.setState({ tasksData: [...arr.slice(0, id), item, ...arr.slice(id + 1)] });
   };
 
