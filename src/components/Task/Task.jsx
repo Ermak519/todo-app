@@ -28,7 +28,7 @@ export default class Task extends Component {
   };
 
   render() {
-    const { descr, status, date, onDoneTask, onEditTask, onDeleteTask } = this.props
+    const { descr, status, date, onDoneTask, onEditTask, onDeleteTask } = this.props;
     const { label } = this.state;
     let taskState = '';
     switch (status) {
@@ -45,8 +45,14 @@ export default class Task extends Component {
     return (
       <li className={taskState}>
         <div className="view">
-          <input id={descr} className="toggle" type="checkbox" onClick={onDoneTask} defaultChecked={taskState !== 'active'}/>
-          <label htmlFor={descr} >
+          <input
+            id={descr}
+            className="toggle"
+            type="checkbox"
+            onClick={onDoneTask}
+            defaultChecked={taskState !== 'active'}
+          />
+          <label htmlFor={descr}>
             <span className="description">{descr}</span>
             <span className="created">created {date}</span>
           </label>
@@ -54,14 +60,15 @@ export default class Task extends Component {
           <button className="icon icon-destroy" onClick={onDeleteTask} type="button" aria-label="Delete Task" />
         </div>
         <form onSubmit={this.onSubmit}>
-          <input 
+          <input
             autoFocus
-            id={descr} 
-            type="text" 
-            className="edit" 
-            value={label}  
-            tabIndex={this.id} 
-            onChange={this.changeDescr} />
+            id={descr}
+            type="text"
+            className="edit"
+            value={label}
+            tabIndex={this.id}
+            onChange={this.changeDescr}
+          />
         </form>
       </li>
     );
@@ -71,10 +78,10 @@ export default class Task extends Component {
 Task.defaultProps = {
   descr: 'error',
   status: 'active',
-  onDoneTask: () => { },
-  onEditTask: () => { },
-  onDeleteTask: () => { },
-  onConfirmEditingTask: () => { },
+  onDoneTask: () => {},
+  onEditTask: () => {},
+  onDeleteTask: () => {},
+  onConfirmEditingTask: () => {},
   id: 0,
   date: '1999 date',
 };
