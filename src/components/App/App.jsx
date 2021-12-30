@@ -51,8 +51,8 @@ export default class App extends Component {
   };
 
   toggleFilterTasks = (posts, filter) => {
-    if (filter==='active') return posts.filter((obj) => obj.status === 'active');
-    if (filter==='completed') return posts.filter((obj) => obj.status === 'completed');
+    if (filter === 'active') return posts.filter((obj) => obj.status === 'active');
+    if (filter === 'completed') return posts.filter((obj) => obj.status === 'completed');
     return posts.filter((obj) => obj);
   };
 
