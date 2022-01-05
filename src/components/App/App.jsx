@@ -14,16 +14,19 @@ export default class App extends Component {
         {
           description: 'Completed task',
           status: 'active',
+          prevStatus: '',
           createDate: '2020-06-02T19:55:11',
         },
         {
           description: 'Editing task',
           status: 'active',
+          prevStatus: '',
           createDate: '2021-11-20T19:55:11',
         },
         {
           description: 'Active task',
           status: 'active',
+          prevStatus: '',
           createDate: '2021-12-30T19:55:11',
         },
       ],
@@ -64,6 +67,7 @@ export default class App extends Component {
       id: arr.length + 1,
       description: text,
       status: 'active',
+      prevStatus: '',
       createDate: `${new Date()}`,
     };
     this.setState({ tasksData: [...arr, newItem] });
@@ -86,6 +90,7 @@ export default class App extends Component {
   onEditTask = (id) => {
     const { tasksData: arr } = this.state;
     const item = arr[id];
+    item.prevStatus = item.status;
     item.status = 'editing';
     this.setState({ tasksData: [...arr.slice(0, id), item, ...arr.slice(id + 1)] });
   };
@@ -94,7 +99,7 @@ export default class App extends Component {
     const { tasksData: arr } = this.state;
     const item = arr[id];
     item.description = text;
-    item.status = 'active';
+    item.status = item.prevStatus;
     const date = item.createDate;
     item.createDate = date;
     this.setState({ tasksData: [...arr.slice(0, id), item, ...arr.slice(id + 1)] });
