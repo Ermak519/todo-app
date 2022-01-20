@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { Timer } from '../Timer';
 
 import './Task.scss';
 
@@ -54,12 +55,11 @@ export default class Task extends Component {
           />
           <label htmlFor={descr}>
             <span className="title">{descr}</span>
-            <span className="description">
-                  <button className="icon icon-play" type="button" aria-label="Icon Play" />
-                  <button className="icon icon-pause" type="button" aria-label="Icon Pause" />
-                  12:25
-                </span>
-            <span className="description">created {date}</span>
+            <span className="description description__timer">
+              <Timer
+                taskState={taskState} />
+            </span>
+            <span className="description description__date">created {date}</span>
           </label>
           <button className="icon icon-edit" onClick={onEditTask} type="button" aria-label="Edit Task" />
           <button className="icon icon-destroy" onClick={onDeleteTask} type="button" aria-label="Delete Task" />
@@ -84,10 +84,10 @@ export default class Task extends Component {
 Task.defaultProps = {
   descr: 'error',
   status: 'active',
-  onDoneTask: () => {},
-  onEditTask: () => {},
-  onDeleteTask: () => {},
-  onConfirmEditingTask: () => {},
+  onDoneTask: () => { },
+  onEditTask: () => { },
+  onDeleteTask: () => { },
+  onConfirmEditingTask: () => { },
   id: 0,
   date: '99999999 date',
 };
