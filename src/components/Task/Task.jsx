@@ -53,8 +53,13 @@ export default class Task extends Component {
             defaultChecked={taskState !== 'active'}
           />
           <label htmlFor={descr}>
-            <span className="description">{descr}</span>
-            <span className="created">created {date}</span>
+            <span className="title">{descr}</span>
+            <span className="description">
+                  <button className="icon icon-play" type="button" aria-label="Icon Play" />
+                  <button className="icon icon-pause" type="button" aria-label="Icon Pause" />
+                  12:25
+                </span>
+            <span className="description">created {date}</span>
           </label>
           <button className="icon icon-edit" onClick={onEditTask} type="button" aria-label="Edit Task" />
           <button className="icon icon-destroy" onClick={onDeleteTask} type="button" aria-label="Delete Task" />
@@ -74,6 +79,7 @@ export default class Task extends Component {
     );
   }
 }
+
 
 Task.defaultProps = {
   descr: 'error',
