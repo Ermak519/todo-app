@@ -13,6 +13,7 @@ export default class Task extends Component {
 
     this.state = {
       label: this.descr,
+      timerStatus: 'stop', // play, pause
     };
   }
 
@@ -28,9 +29,22 @@ export default class Task extends Component {
     this.onConfirmEditingTask(this.id, label);
   };
 
+    onStartTask = () => {
+        this.setState({
+          timerStatus: 'play',
+        });  
+  }
+
+  onPauseTask = () => {
+      this.setState({
+        timerStatus: 'pause',
+      })
+  }
+
   render() {
     const { descr, status, date, onDoneTask, onEditTask, onDeleteTask } = this.props;
-    const { label } = this.state;
+    const { label, timerStatus, startTimer, pauseTimer} = this.state;
+
     let taskState = '';
     switch (status) {
       case 'completed':
@@ -56,8 +70,23 @@ export default class Task extends Component {
           <label htmlFor={descr}>
             <span className="title">{descr}</span>
             <span className="description description__timer">
-              <Timer
-                taskState={taskState} />
+            <button
+                    className="icon icon-play"
+                    type="button"
+                    aria-label="Icon Play"
+                    onClick={this.onStartTask}
+                />
+                <button
+                    className="icon icon-pause"
+                    type="button"
+                    aria-label="Icon Pause"
+                    onClick={this.onPauseTask}
+                />
+              {timerStatus !== 'stop' ? <Timer
+                timerStatus={timerStatus}
+                taskState={taskState}
+                startTimer={startTimer}
+                pauseTime={pauseTimer} /> : null}
             </span>
             <span className="description description__date">created {date}</span>
           </label>

@@ -6,65 +6,53 @@ import './Timer.scss'
 export default class Timer extends Component {
     constructor() {
         super();
+
         this.state = {
-            timer: '00:00'
+            total: 0,
+            sec: 0,
+            min: 0,
         }
     }
 
     componentDidMount() {
-        console.log('mount')
-        this.timerID = setInterval(this.onChangeTimer, 3000)
+        this.timerID = setInterval(()=>{this.tick()}, 1000)
     }
-
 
     componentWillUnmount() {
-        console.log('unmount')
-        const { taskState } = this.props;
-        if (taskState === 'completed') clearInterval(this.timerID)
+        clearInterval(this.timerID);
     }
 
-    onChangeTimer = () => {
-        this.setState({
-            timer: Math.floor(Math.random() * 50 + 22)
-        })
-    }
+    tick = () => {
+        const {total, sec, min} = this.state;
+        const {timerStatus} = this.props;
 
-    onStartTask = () => {
-        console.log('start')
-    }
+        let newTotal = total;
+        let newSec = sec;
+        let newMin = min;
 
-    onPauseTask = () => {
-        console.log('pause')
+        if(timerStatus === 'play') {
+            this.setState({
+                total: newTotal+=1,
+                sec: newTotal % 60 ? newSec += 1 : 0,
+                min: !(newTotal % 60 )? newMin += 1 :  newMin,
+            });
+        }
     }
-
+    
     render() {
-        const { timer } = this.state;
+        const { sec, min} = this.state;
 
         return (
-            <>
-                <button
-                    className="icon icon-play"
-                    type="button"
-                    aria-label="Icon Play"
-                    onClick={this.onStartTask}
-                />
-                <button
-                    className="icon icon-pause"
-                    type="button"
-                    aria-label="Icon Pause"
-                    onClick={this.onPauseTask}
-                />
-                <span className="timer">{timer}</span>
-            </>
+            <span className="timer">{`${min}:${sec}`}</span>
         )
     }
 }
 
-
 Timer.defaultProps = {
-    taskState: ''
+    timerStatus: ''
 }
 
 Timer.propTypes = {
-    taskState: PropTypes.string
+    timerStatus: PropTypes.string
 }
+
