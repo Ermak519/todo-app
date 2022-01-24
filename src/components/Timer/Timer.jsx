@@ -15,7 +15,7 @@ export default class Timer extends Component {
     }
 
     componentDidMount() {
-        this.timerID = setInterval(()=>{this.tick()}, 1000)
+        this.timerID = setInterval(() => { this.tick() }, 1000)
     }
 
     componentWillUnmount() {
@@ -23,24 +23,24 @@ export default class Timer extends Component {
     }
 
     tick = () => {
-        const {total, sec, min} = this.state;
-        const {timerStatus} = this.props;
+        const { total, sec, min } = this.state;
+        const { timerStatus } = this.props;
 
         let newTotal = total;
         let newSec = sec;
         let newMin = min;
 
-        if(timerStatus === 'play') {
+        if (timerStatus === 'play') {
             this.setState({
-                total: newTotal+=1,
+                total: newTotal += 1,
                 sec: newTotal % 60 ? newSec += 1 : 0,
-                min: !(newTotal % 60 )? newMin += 1 :  newMin,
+                min: !(newTotal % 60) ? newMin += 1 : newMin,
             });
         }
     }
-    
+
     render() {
-        const { sec, min} = this.state;
+        const { sec, min } = this.state;
 
         return (
             <span className="timer">{`${min}:${sec}`}</span>

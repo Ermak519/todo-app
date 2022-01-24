@@ -36,7 +36,7 @@ export default function TaskList({
         onConfirmEditingTask(idx, text);
       }}
       id={i}
-      key={`${obj.description}-${obj.createDate}_${Math.random() + i}_${new Date()}`}
+      key={`id_${i + 1}_${obj.description}`}
     />
   ));
 
@@ -55,15 +55,15 @@ export default function TaskList({
 
 TaskList.defaultProps = {
   tasksData: [],
-  onDoneTask: () => {},
-  onEditTask: () => {},
-  onDeleteTask: () => {},
-  onConfirmEditingTask: () => {},
+  onDoneTask: () => { },
+  onEditTask: () => { },
+  onDeleteTask: () => { },
+  onConfirmEditingTask: () => { },
   count: 0,
   btnFiltersStatus: [],
-  onFilterTasks: () => {},
-  onDeleteDoneTasks: () => {},
-  showDateOfCreateTask: () => {},
+  onFilterTasks: () => { },
+  onDeleteDoneTasks: () => { },
+  showDateOfCreateTask: () => { },
 };
 
 TaskList.propTypes = {
