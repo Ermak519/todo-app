@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Task from '../Task/Task.jsx';
-import { Footer } from '../Footer';
+
 
 import './TaskList.scss';
 
@@ -12,10 +12,6 @@ export default function TaskList({
   onEditTask,
   onDeleteTask,
   onConfirmEditingTask,
-  count,
-  btnFiltersStatus,
-  onFilterTasks,
-  onDeleteDoneTasks,
   showDateOfCreateTask,
 }) {
   const arrTasks = tasksData.map((obj, i) => (
@@ -30,7 +26,7 @@ export default function TaskList({
         onEditTask(i);
       }}
       onDeleteTask={() => {
-        onDeleteTask(i);
+        onDeleteTask(i); 
       }}
       onConfirmEditingTask={(idx, text) => {
         onConfirmEditingTask(idx, text);
@@ -43,12 +39,6 @@ export default function TaskList({
   return (
     <section className="main">
       <ul className="todo-list">{arrTasks}</ul>
-      <Footer
-        btnFiltersStatus={btnFiltersStatus}
-        onFilterTasks={onFilterTasks}
-        onDeleteDoneTasks={onDeleteDoneTasks}
-        count={count}
-      />
     </section>
   );
 }
@@ -59,10 +49,6 @@ TaskList.defaultProps = {
   onEditTask: () => { },
   onDeleteTask: () => { },
   onConfirmEditingTask: () => { },
-  count: 0,
-  btnFiltersStatus: [],
-  onFilterTasks: () => { },
-  onDeleteDoneTasks: () => { },
   showDateOfCreateTask: () => { },
 };
 
@@ -72,9 +58,5 @@ TaskList.propTypes = {
   onEditTask: PropTypes.func,
   onDeleteTask: PropTypes.func,
   onConfirmEditingTask: PropTypes.func,
-  count: PropTypes.number,
-  btnFiltersStatus: PropTypes.arrayOf(PropTypes.object),
-  onFilterTasks: PropTypes.func,
-  onDeleteDoneTasks: PropTypes.func,
   showDateOfCreateTask: PropTypes.func,
 };

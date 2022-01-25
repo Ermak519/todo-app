@@ -4,6 +4,7 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
 import NewTaskForm from '../NewTaskForm/NewTaskForm.jsx';
 import { TaskList } from '../TaskList';
+import { Footer } from '../Footer';
 import './App.scss';
 
 export default class App extends Component {
@@ -126,20 +127,25 @@ export default class App extends Component {
       <section className="todoapp">
         <header className="header">
           <h1>todos</h1>
-          <NewTaskForm onAddTask={this.onAddTask} allTasks={tasksData} />
         </header>
+        <NewTaskForm 
+          onAddTask={this.onAddTask} 
+          allTasks={tasksData} 
+        />
         <TaskList
           tasksData={posts}
           onDoneTask={this.onDoneTask}
           onEditTask={this.onEditTask}
           onConfirmEditingTask={this.onConfirmEditingTask}
           onDeleteTask={this.onDeleteTask}
-          count={allCount}
-          btnFiltersStatus={btnStatus}
-          onFilterTasks={this.onFilterTasks}
-          onDeleteDoneTasks={this.onDeleteAllDoneTasks}
           showDateOfCreateTask={this.showDateOfCreateTask}
         />
+        <Footer
+        btnFiltersStatus={btnStatus}
+        onFilterTasks={this.onFilterTasks}
+        onDeleteDoneTasks={this.onDeleteAllDoneTasks}
+        count={allCount}
+      />
       </section>
     );
   }
