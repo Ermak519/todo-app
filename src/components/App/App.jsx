@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+import shortid from 'shortid';
 
 import NewTaskForm from '../NewTaskForm/NewTaskForm.jsx';
 import { TaskList } from '../TaskList';
@@ -13,18 +14,21 @@ export default class App extends Component {
     this.state = {
       tasksData: [
         {
+          id: `id_${shortid.generate()}`,
           description: 'Completed task',
           status: 'active',
           prevStatus: '',
-          createDate: '2020-06-02T19:55:11',
+          createDate: '2020-06-02T19:55:11'
         },
         {
+          id: `id_${shortid.generate()}`,
           description: 'Editing task',
           status: 'active',
           prevStatus: '',
           createDate: '2021-11-20T19:55:11',
         },
         {
+          id: `id_${shortid.generate()}`,
           description: 'Active task',
           status: 'active',
           prevStatus: '',
@@ -65,7 +69,7 @@ export default class App extends Component {
   onAddTask = (text) => {
     const { tasksData: arr } = this.state;
     const newItem = {
-      id: arr.length + 1,
+      id: `id_${shortid.generate()}`,
       description: text,
       status: 'active',
       prevStatus: '',
@@ -98,12 +102,13 @@ export default class App extends Component {
 
   onConfirmEditingTask = (id, text) => {
     const { tasksData: arr } = this.state;
-    const item = arr[id];
+    const [item] = arr.filter(obj=> obj.id === id);
+    const idx = arr.indexOf(item)
     item.description = text;
     item.status = item.prevStatus;
     const date = item.createDate;
     item.createDate = date;
-    this.setState({ tasksData: [...arr.slice(0, id), item, ...arr.slice(id + 1)] });
+    this.setState({ tasksData: [...arr.slice(0, idx), item, ...arr.slice(idx + 1)] });
   };
 
   onDeleteTask = (id) => {

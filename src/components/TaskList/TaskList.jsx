@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Task from '../Task/Task.jsx';
+
+import {Task} from '../Task';
 
 
 import './TaskList.scss';
@@ -31,8 +32,8 @@ export default function TaskList({
       onConfirmEditingTask={(idx, text) => {
         onConfirmEditingTask(idx, text);
       }}
-      id={i}
-      key={`id_${i + 1}_${obj.description}`}
+      id={obj.id}
+      key={obj.id}
     />
   ));
 

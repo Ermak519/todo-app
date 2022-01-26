@@ -1,5 +1,6 @@
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import { Timer } from '../Timer';
 
 import './Task.scss';
@@ -42,7 +43,7 @@ export default class Task extends Component {
   }
 
   render() {
-    const { descr, status, date, onDoneTask, onEditTask, onDeleteTask } = this.props;
+    const { id, descr, status, date, onDoneTask, onEditTask, onDeleteTask } = this.props;
     const { label, timerStatus } = this.state;
 
     let taskState = '';
@@ -61,13 +62,13 @@ export default class Task extends Component {
       <li className={taskState}>
         <div className="view">
           <input
-            id={descr}
+            id={id}
             className="toggle"
             type="checkbox"
             onClick={onDoneTask}
             defaultChecked={taskState !== 'active'}
           />
-          <label htmlFor={descr}>
+          <label htmlFor={id}>
             <span className="title">{descr}</span>
             <span className="description description__timer">
               <button
@@ -95,7 +96,7 @@ export default class Task extends Component {
         <form onSubmit={this.onSubmit}>
           <input
             autoFocus
-            id={descr}
+            id={id}
             type="text"
             className="edit"
             value={label}
@@ -116,7 +117,7 @@ Task.defaultProps = {
   onEditTask: () => { },
   onDeleteTask: () => { },
   onConfirmEditingTask: () => { },
-  id: 0,
+  id: '',
   date: '99999999 date',
 };
 
@@ -127,6 +128,6 @@ Task.propTypes = {
   onDoneTask: PropTypes.func,
   onEditTask: PropTypes.func,
   onDeleteTask: PropTypes.func,
-  id: PropTypes.number,
+  id: PropTypes.string,
   date: PropTypes.string,
 };
