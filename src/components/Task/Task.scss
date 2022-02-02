@@ -31,10 +31,15 @@
 }
 
 .todo-list li {
+	display: block;
 	position: relative;
 	font-size: 24px;
 	border-bottom: 1px solid #ededed;
 }
+
+.todo-list li.hide {
+	display: none;
+} 
 
 .todo-list li .title{
 	flex-grow: 1;

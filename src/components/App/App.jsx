@@ -8,15 +8,16 @@ import { TaskList } from '../TaskList';
 import { Footer } from '../Footer';
 import './App.scss';
 
-export default function App () {
+export default function App() {
 
   const [tasksData, setTasksData] = useState([
     {
       id: `id_${shortid.generate()}`,
       description: 'Completed task',
-      status: 'active',
+      status: 'completed',
       prevStatus: '',
-      createDate: '2020-06-02T19:55:11'
+      createDate: '2020-06-02T19:55:11',
+      visible: ''
     },
     {
       id: `id_${shortid.generate()}`,
@@ -24,6 +25,7 @@ export default function App () {
       status: 'active',
       prevStatus: '',
       createDate: '2021-11-20T19:55:11',
+      visible: ''
     },
     {
       id: `id_${shortid.generate()}`,
@@ -31,6 +33,7 @@ export default function App () {
       status: 'active',
       prevStatus: '',
       createDate: '2021-12-30T19:55:11',
+      visible: ''
     },
   ]);
 
@@ -40,12 +43,41 @@ export default function App () {
     { descr: 'Completed', status: '' },
   ]);
 
-  const [filterStatus, setFilterStatus] = useState('all')
 
   const doneCount = tasksData.filter((obj) => obj.status === 'completed').length;
   const allCount = tasksData.length - doneCount;
-    
+
   const showDateOfCreateTask = (date) => formatDistanceToNow(Date.parse(date), { addSuffix: true });
+
+  const toggleFilterTasks = (filter) => {
+    if (filter === 'active') {
+      tasksData.forEach((obj) => {
+        const elem = obj
+        if (obj.status !== 'active') {
+          elem.visible = 'hide'
+        } else {
+          elem.visible = ''
+        }
+      });
+    }
+    if (filter === 'completed') {
+      tasksData.forEach((obj) => {
+        const elem = obj
+        if (obj.status !== 'completed') {
+          elem.visible = 'hide'
+        } else {
+          elem.visible = ''
+        }
+      });
+    }
+    if (filter === 'all') {
+      tasksData.forEach((obj) => {
+        const elem = obj
+        elem.visible = ''
+      });
+    }
+    setTasksData([...tasksData])
+  };
 
   const onFilterTasks = (id) => {
     btnStatus.forEach((obj) => {
@@ -56,16 +88,10 @@ export default function App () {
     item.status = 'selected';
 
     setBtnStatus([...btnStatus.slice(0, id), item, ...btnStatus.slice(id + 1)]);
-    setFilterStatus(item.descr.toLowerCase())
+    toggleFilterTasks(item.descr.toLowerCase());
   };
 
-  const toggleFilterTasks = (posts, filter) => {
-    if (filter === 'active') return posts.filter((obj) => obj.status === 'active');
-    if (filter === 'completed') return posts.filter((obj) => obj.status === 'completed');
-    return posts.filter((obj) => obj);
-  };
 
-  const posts = toggleFilterTasks(tasksData, filterStatus);
 
   const onAddTask = (text) => {
     const newItem = {
@@ -99,7 +125,7 @@ export default function App () {
   };
 
   const onConfirmEditingTask = (id, text) => {
-    const [item] = tasksData.filter(obj=> obj.id === id);
+    const [item] = tasksData.filter(obj => obj.id === id);
     const idx = tasksData.indexOf(item)
     item.description = text;
     item.status = item.prevStatus;
@@ -121,12 +147,12 @@ export default function App () {
       <header className="header">
         <h1>todos</h1>
       </header>
-      <NewTaskForm 
-        onAddTask={onAddTask} 
-        allTasks={tasksData} 
+      <NewTaskForm
+        onAddTask={onAddTask}
+        allTasks={tasksData}
       />
       <TaskList
-        tasksData={posts}
+        tasksData={tasksData}
         onDoneTask={onDoneTask}
         onEditTask={onEditTask}
         onConfirmEditingTask={onConfirmEditingTask}
@@ -134,11 +160,11 @@ export default function App () {
         showDateOfCreateTask={showDateOfCreateTask}
       />
       <Footer
-      btnFiltersStatus={btnStatus}
-      onFilterTasks={onFilterTasks}
-      onDeleteDoneTasks={onDeleteAllDoneTasks}
-      count={allCount}
-    />
+        btnFiltersStatus={btnStatus}
+        onFilterTasks={onFilterTasks}
+        onDeleteDoneTasks={onDeleteAllDoneTasks}
+        count={allCount}
+      />
     </section>
   );
 }

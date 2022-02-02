@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 
-import {Task} from '../Task';
+import { Task } from '../Task';
 
 
 import './TaskList.scss';
@@ -27,11 +27,12 @@ export default function TaskList({
         onEditTask(i);
       }}
       onDeleteTask={() => {
-        onDeleteTask(i); 
+        onDeleteTask(i);
       }}
       onConfirmEditingTask={(idx, text) => {
         onConfirmEditingTask(idx, text);
       }}
+      visible={obj.visible}
       id={obj.id}
       key={obj.id}
     />

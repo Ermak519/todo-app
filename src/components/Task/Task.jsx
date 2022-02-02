@@ -5,7 +5,7 @@ import { Timer } from '../Timer';
 
 import './Task.scss';
 
-export default function Task ({ onConfirmEditingTask, id, descr, status, date, onDoneTask, onEditTask, onDeleteTask }){
+export default function Task({ onConfirmEditingTask, id, descr, status, date, onDoneTask, onEditTask, onDeleteTask, visible }) {
 
   const [label, setLabel] = useState(descr);
   const [timerStatus, setTimerStatus] = useState('stop');
@@ -41,7 +41,7 @@ export default function Task ({ onConfirmEditingTask, id, descr, status, date, o
   }
 
   return (
-    <li className={taskState}>
+    <li className={`${taskState} ${visible}`}>
       <div className="view">
         <input
           id={id}
@@ -99,6 +99,7 @@ Task.defaultProps = {
   onDeleteTask: () => { },
   onConfirmEditingTask: () => { },
   id: '',
+  visible: '',
   date: '99999999 date',
 };
 
@@ -110,5 +111,6 @@ Task.propTypes = {
   onEditTask: PropTypes.func,
   onDeleteTask: PropTypes.func,
   id: PropTypes.string,
+  visible: PropTypes.string,
   date: PropTypes.string,
 };
