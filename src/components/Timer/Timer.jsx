@@ -4,15 +4,15 @@ import PropTypes from 'prop-types';
 import './Timer.scss'
 
 export default function Timer({ timerStatus }) {
-    const [total, setTotal] = useState(0);
-    const [sec, setSec] = useState(0);
-    const [min, setMin] = useState(0);
+    const [timer, setTimer] = useState({total: 0, sec: 0, min: 0})
 
     const tick = () => {
         if (timerStatus === 'play') {
-            setTotal(total + 1);
-            setSec(total % 60 ? sec + 1 : 0);
-            setMin(!(total % 60) && total !== 0 ? min + 1 : min)
+            setTimer({...timer, 
+                total: timer.total + 1, 
+                sec: timer.total % 60 ? timer.sec + 1 : 0, 
+                min: !(timer.total % 60) && timer.total !== 0 ? timer.min + 1 : timer.min
+            })
         }
     }
 
@@ -21,7 +21,7 @@ export default function Timer({ timerStatus }) {
         return () => { clearInterval(timerID); }
     })
 
-    return <span className="timer">{`${min}:${sec}`}</span>
+    return <span className="timer">{`${timer.min}:${timer.sec}`}</span>
 }
 
 Timer.defaultProps = {
