@@ -14,7 +14,7 @@ export default function App() {
     {
       id: `id_${shortid.generate()}`,
       description: 'Completed task',
-      status: 'completed',
+      status: 'active',
       prevStatus: '',
       createDate: '2020-06-02T19:55:11',
       visible: ''
