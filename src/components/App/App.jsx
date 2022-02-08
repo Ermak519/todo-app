@@ -19,8 +19,8 @@ export default function App() {
       createDate: '2020-06-02T19:55:11',
       visible: '',
       timer: {
-        sec: '0',
-        min: '10'
+        sec: '5',
+        min: '0'
       }
     },
     {
@@ -31,7 +31,7 @@ export default function App() {
       createDate: '2021-11-20T19:55:11',
       visible: '',
       timer: {
-        sec: '0',
+        sec: '5',
         min: '10'
       }
     },
@@ -55,9 +55,21 @@ export default function App() {
     { descr: 'Completed', status: '' },
   ]);
 
-
   const doneCount = tasksData.filter((obj) => obj.status === 'completed').length;
   const allCount = tasksData.length - doneCount;
+
+  const tickTimer = (id, status) => {
+    const item = tasksData[id];
+    const { timer } = item;
+    if (status === 'play') {
+      const newTimer = {
+        sec: +timer.sec > 0 ? timer.sec - 1 : 59,
+        min: +timer.sec === 0 ? timer.min - 1 : timer.min
+      };
+      item.timer = newTimer;
+      setTasksData([...tasksData.slice(0, id), item, ...tasksData.slice(id + 1)]);
+    }
+  }
 
   const showDateOfCreateTask = (date) => formatDistanceToNow(Date.parse(date), { addSuffix: true });
 
@@ -160,6 +172,7 @@ export default function App() {
         onConfirmEditingTask={onConfirmEditingTask}
         onDeleteTask={onDeleteTask}
         showDateOfCreateTask={showDateOfCreateTask}
+        tickTimer={tickTimer}
       />
       <Footer
         btnFiltersStatus={btnStatus}

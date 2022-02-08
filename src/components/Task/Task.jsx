@@ -7,7 +7,7 @@ import { Timer } from '../Timer';
 
 import './Task.scss';
 
-export default function Task({ onConfirmEditingTask, timer, id, descr, status, date, onDoneTask, onEditTask, onDeleteTask, visible }) {
+export default function Task({ tickTimer, onConfirmEditingTask, timer, id, descr, status, date, onDoneTask, onEditTask, onDeleteTask, visible }) {
 
   const [label, setLabel] = useState(descr);
   const [timerStatus, setTimerStatus] = useState('stop');
@@ -69,6 +69,7 @@ export default function Task({ onConfirmEditingTask, timer, id, descr, status, d
             />
             <Timer
               timer={timer}
+              tickTimer={tickTimer}
               timerStatus={timerStatus}
               taskState={taskState}
             />

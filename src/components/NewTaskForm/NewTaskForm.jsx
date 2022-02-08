@@ -23,24 +23,24 @@ export default function NewTaskForm({ onAddTask }) {
   };
 
   const onSubmit = (event) => {
-    console.log('submit')
-    event.preventDefault();
-    if (label.trim() !== '') {
-      onAddTask(label, min, sec);
-      setLabel('');
-      setMin('');
-      setSec('')
+    if (event.keyCode === 13) {
+      if (label.trim() !== '' && !isNaN(min) && !isNaN(sec) && min && sec && min > 0 && sec > 0 && sec < 60) {
+        onAddTask(label, min, sec);
+        setLabel('');
+        setMin('');
+        setSec('')
+      }
     }
   };
 
   return (
-    <form className="new-todo-form" onSubmit={onSubmit}>
+    <form className="new-todo-form" >
       <label htmlFor="new-todo" />
-      <input id="new-todo" className="new-todo" placeholder="Task" autoFocus onChange={onLabelChange} value={label} />
+      <input id="new-todo" className="new-todo" placeholder="Task" autoFocus onKeyDown={onSubmit} onChange={onLabelChange} value={label} />
       <label htmlFor="new-todo__min" />
-      <input type="text" className="new-todo-form__timer" placeholder="Min" onChange={onMinChange} value={min} />
+      <input type="text" className="new-todo-form__timer" placeholder="Min" onKeyDown={onSubmit} onChange={onMinChange} value={min} />
       <label htmlFor="new-todo__sec" />
-      <input className="new-todo-form__timer" placeholder="Sec" onChange={onSecChange} value={sec} />
+      <input className="new-todo-form__timer" placeholder="Sec" onKeyDown={onSubmit} onChange={onSecChange} value={sec} />
     </form>
   );
 }

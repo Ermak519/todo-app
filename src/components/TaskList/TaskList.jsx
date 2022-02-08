@@ -14,6 +14,7 @@ export default function TaskList({
   onDeleteTask,
   onConfirmEditingTask,
   showDateOfCreateTask,
+  tickTimer
 }) {
   const arrTasks = tasksData.map((obj, i) => (
     <Task
@@ -34,6 +35,7 @@ export default function TaskList({
       }}
       visible={obj.visible}
       timer={obj.timer}
+      tickTimer={(status) => { tickTimer(i, status) }}
       id={obj.id}
       key={obj.id}
     />
@@ -53,6 +55,7 @@ TaskList.defaultProps = {
   onDeleteTask: () => { },
   onConfirmEditingTask: () => { },
   showDateOfCreateTask: () => { },
+  tickTimer: () => { }
 };
 
 TaskList.propTypes = {
@@ -62,4 +65,5 @@ TaskList.propTypes = {
   onDeleteTask: PropTypes.func,
   onConfirmEditingTask: PropTypes.func,
   showDateOfCreateTask: PropTypes.func,
+  tickTimer: PropTypes.func
 };
