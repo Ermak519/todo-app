@@ -1,3 +1,5 @@
+/*eslint-disable */
+
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
@@ -5,7 +7,7 @@ import { Timer } from '../Timer';
 
 import './Task.scss';
 
-export default function Task({ onConfirmEditingTask, id, descr, status, date, onDoneTask, onEditTask, onDeleteTask, visible }) {
+export default function Task({ onConfirmEditingTask, timer, id, descr, status, date, onDoneTask, onEditTask, onDeleteTask, visible }) {
 
   const [label, setLabel] = useState(descr);
   const [timerStatus, setTimerStatus] = useState('stop');
@@ -66,6 +68,7 @@ export default function Task({ onConfirmEditingTask, id, descr, status, date, on
               onClick={onPauseTask}
             />
             <Timer
+              timer={timer}
               timerStatus={timerStatus}
               taskState={taskState}
             />
@@ -77,13 +80,13 @@ export default function Task({ onConfirmEditingTask, id, descr, status, date, on
       </div>
       <form onSubmit={onSubmit}>
         <input
-          autoFocus
           id={id}
           type="text"
           className="edit"
           value={label}
           tabIndex={id}
           onChange={changeDescr}
+          autoFocus
         />
       </form>
     </li>
@@ -99,6 +102,8 @@ Task.defaultProps = {
   onDeleteTask: () => { },
   onConfirmEditingTask: () => { },
   id: '',
+  min: '',
+  sec: '',
   visible: '',
   date: '99999999 date',
 };
@@ -111,6 +116,8 @@ Task.propTypes = {
   onEditTask: PropTypes.func,
   onDeleteTask: PropTypes.func,
   id: PropTypes.string,
+  min: PropTypes.string,
+  sec: PropTypes.string,
   visible: PropTypes.string,
   date: PropTypes.string,
 };

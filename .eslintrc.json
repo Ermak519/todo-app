@@ -70,9 +70,19 @@
             "off"
         ],
         "jsx-a11y/label-has-associated-control": [
-            "error",
+            2,
             {
-                "assert": "either"
+                "labelComponents": [
+                    "CustomLabel"
+                ],
+                "labelAttributes": [
+                    "inputLabel"
+                ],
+                "controlComponents": [
+                    "CustomInput"
+                ],
+                "assert": "both",
+                "depth": 3
             }
         ],
         "react/state-in-constructor": [

@@ -17,7 +17,11 @@ export default function App() {
       status: 'active',
       prevStatus: '',
       createDate: '2020-06-02T19:55:11',
-      visible: ''
+      visible: '',
+      timer: {
+        sec: '0',
+        min: '10'
+      }
     },
     {
       id: `id_${shortid.generate()}`,
@@ -25,7 +29,11 @@ export default function App() {
       status: 'active',
       prevStatus: '',
       createDate: '2021-11-20T19:55:11',
-      visible: ''
+      visible: '',
+      timer: {
+        sec: '0',
+        min: '10'
+      }
     },
     {
       id: `id_${shortid.generate()}`,
@@ -33,7 +41,11 @@ export default function App() {
       status: 'active',
       prevStatus: '',
       createDate: '2021-12-30T19:55:11',
-      visible: ''
+      visible: '',
+      timer: {
+        sec: '0',
+        min: '10'
+      }
     },
   ]);
 
@@ -50,33 +62,20 @@ export default function App() {
   const showDateOfCreateTask = (date) => formatDistanceToNow(Date.parse(date), { addSuffix: true });
 
   const toggleFilterTasks = (filter) => {
-    if (filter === 'active') {
-      tasksData.forEach((obj) => {
-        const elem = obj
-        if (obj.status !== 'active') {
+    const arr = tasksData.filter((item) => {
+      const elem = item;
+      if (filter !== 'all') {
+        if (item.status !== filter) {
           elem.visible = 'hide'
         } else {
           elem.visible = ''
         }
-      });
-    }
-    if (filter === 'completed') {
-      tasksData.forEach((obj) => {
-        const elem = obj
-        if (obj.status !== 'completed') {
-          elem.visible = 'hide'
-        } else {
-          elem.visible = ''
-        }
-      });
-    }
-    if (filter === 'all') {
-      tasksData.forEach((obj) => {
-        const elem = obj
+      } else {
         elem.visible = ''
-      });
-    }
-    setTasksData([...tasksData])
+      }
+      return true
+    })
+    setTasksData([...arr])
   };
 
   const onFilterTasks = (id) => {
@@ -92,14 +91,17 @@ export default function App() {
   };
 
 
-
-  const onAddTask = (text) => {
+  const onAddTask = (text, taskMin, taskSec) => {
     const newItem = {
       id: `id_${shortid.generate()}`,
       description: text,
       status: 'active',
       prevStatus: '',
       createDate: `${new Date()}`,
+      timer: {
+        min: taskMin,
+        sec: taskSec
+      }
     };
     setTasksData([...tasksData, newItem])
   };

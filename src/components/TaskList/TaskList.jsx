@@ -33,6 +33,7 @@ export default function TaskList({
         onConfirmEditingTask(idx, text);
       }}
       visible={obj.visible}
+      timer={obj.timer}
       id={obj.id}
       key={obj.id}
     />
