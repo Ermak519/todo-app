@@ -15,7 +15,7 @@ export default function Timer({ timerStatus, timer }) {
         if (timerStatus === 'play') {
             setTimer({
                 ...time,
-                min: time.sec === 0 ? time.min - 1 : time.min,
+                min: +time.sec === 0 ? time.min - 1 : time.min,
                 sec: time.sec > 0 ? time.sec - 1 : 59
             });
         }
