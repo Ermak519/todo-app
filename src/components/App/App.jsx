@@ -58,19 +58,6 @@ export default function App() {
   const doneCount = tasksData.filter((obj) => obj.status === 'completed').length;
   const allCount = tasksData.length - doneCount;
 
-  const tickTimer = (id, status) => {
-    const item = tasksData[id];
-    const { timer } = item;
-    if (status === 'play') {
-      const newTimer = {
-        sec: +timer.sec > 0 ? timer.sec - 1 : 59,
-        min: +timer.sec === 0 ? timer.min - 1 : timer.min
-      };
-      item.timer = newTimer;
-      setTasksData([...tasksData.slice(0, id), item, ...tasksData.slice(id + 1)]);
-    }
-  }
-
   const showDateOfCreateTask = (date) => formatDistanceToNow(Date.parse(date), { addSuffix: true });
 
   const toggleFilterTasks = (filter) => {
@@ -172,7 +159,6 @@ export default function App() {
         onConfirmEditingTask={onConfirmEditingTask}
         onDeleteTask={onDeleteTask}
         showDateOfCreateTask={showDateOfCreateTask}
-        tickTimer={tickTimer}
       />
       <Footer
         btnFiltersStatus={btnStatus}

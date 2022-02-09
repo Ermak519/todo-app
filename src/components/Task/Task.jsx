@@ -1,16 +1,20 @@
-/*eslint-disable */
-
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { Timer } from '../Timer';
 
 import './Task.scss';
 
-export default function Task({ tickTimer, onConfirmEditingTask, timer, id, descr, status, date, onDoneTask, onEditTask, onDeleteTask, visible }) {
+export default function Task({ onConfirmEditingTask, timer, id, descr, status, date, onDoneTask, onEditTask, onDeleteTask, visible }) {
 
   const [label, setLabel] = useState(descr);
   const [timerStatus, setTimerStatus] = useState('stop');
+
+  const inputFocus = useRef(null);
+
+  useEffect(() => {
+    inputFocus.current.focus();
+  })
 
   const changeDescr = (event) => {
     setLabel(event.target.value);
@@ -28,7 +32,6 @@ export default function Task({ tickTimer, onConfirmEditingTask, timer, id, descr
   const onPauseTask = () => {
     setTimerStatus('pause');
   }
-
 
   let taskState = '';
   switch (status) {
@@ -69,9 +72,7 @@ export default function Task({ tickTimer, onConfirmEditingTask, timer, id, descr
             />
             <Timer
               timer={timer}
-              tickTimer={tickTimer}
               timerStatus={timerStatus}
-              taskState={taskState}
             />
           </span>
           <span className="description description__date">created {date}</span>
@@ -81,13 +82,13 @@ export default function Task({ tickTimer, onConfirmEditingTask, timer, id, descr
       </div>
       <form onSubmit={onSubmit}>
         <input
+          ref={inputFocus}
           id={id}
           type="text"
           className="edit"
           value={label}
           tabIndex={id}
           onChange={changeDescr}
-          autoFocus
         />
       </form>
     </li>
@@ -103,10 +104,9 @@ Task.defaultProps = {
   onDeleteTask: () => { },
   onConfirmEditingTask: () => { },
   id: '',
-  min: '',
-  sec: '',
   visible: '',
   date: '99999999 date',
+  timer: {}
 };
 
 Task.propTypes = {
@@ -117,8 +117,7 @@ Task.propTypes = {
   onEditTask: PropTypes.func,
   onDeleteTask: PropTypes.func,
   id: PropTypes.string,
-  min: PropTypes.string,
-  sec: PropTypes.string,
   visible: PropTypes.string,
   date: PropTypes.string,
+  timer: PropTypes.object
 };
