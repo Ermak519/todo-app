@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+import { Tooltip } from 'antd';
 
 import './NewTaskForm.scss';
 
@@ -43,38 +44,45 @@ export default function NewTaskForm({ onAddTask }) {
   return (
     <form className="new-todo-form">
       <label htmlFor="new-todo" />
-      <input
-        id="new-todo"
-        className="new-todo"
-        placeholder="Task"
-        autoFocus
-        onKeyDown={onSubmit}
-        onChange={onLabelChange}
-        value={label}
-      />
+      <Tooltip placement="topLeft" title='Enter your task'>
+        <input
+          id="new-todo"
+          className="new-todo"
+          placeholder="Task"
+          autoFocus
+          onKeyDown={onSubmit}
+          onChange={onLabelChange}
+          value={label}
+        />
+      </Tooltip>
       <label htmlFor="new-todo__min" />
-      <input
-        type="text"
-        className="new-todo-form__timer"
-        placeholder="Min"
-        onKeyDown={onSubmit}
-        onChange={onMinChange}
-        value={min}
-      />
+      <Tooltip placement="topLeft" title='Enter number of minutes'>
+        <input
+          type="text"
+          className="new-todo-form__timer"
+          placeholder="Min"
+          onKeyDown={onSubmit}
+          onChange={onMinChange}
+          value={min}
+        />
+      </Tooltip>
       <label htmlFor="new-todo__sec" />
-      <input
-        className="new-todo-form__timer"
-        placeholder="Sec"
-        onKeyDown={onSubmit}
-        onChange={onSecChange}
-        value={sec}
-      />
+      <Tooltip placement="topLeft" title='Enter number of secondes'>
+        <input
+          type="text"
+          className="new-todo-form__timer"
+          placeholder="Sec"
+          onKeyDown={onSubmit}
+          onChange={onSecChange}
+          value={sec}
+        />
+      </Tooltip>
     </form>
   );
 }
 
 NewTaskForm.defaultProps = {
-  onAddTask: () => {},
+  onAddTask: () => { },
 };
 
 NewTaskForm.propTypes = {
