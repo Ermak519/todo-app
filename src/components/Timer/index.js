@@ -1,1 +1,1 @@
-export { default as Timer } from './Timer.jsx'
+export { default as Timer } from './Timer.jsx';

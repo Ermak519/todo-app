@@ -5,8 +5,18 @@ import { Timer } from '../Timer';
 
 import './Task.scss';
 
-export default function Task({ onConfirmEditingTask, timer, id, descr, status, date, onDoneTask, onEditTask, onDeleteTask, visible }) {
-
+export default function Task({
+  onConfirmEditingTask,
+  timer,
+  id,
+  descr,
+  status,
+  date,
+  onDoneTask,
+  onEditTask,
+  onDeleteTask,
+  visible,
+}) {
   const [label, setLabel] = useState(descr);
   const [timerStatus, setTimerStatus] = useState('stop');
 
@@ -14,7 +24,7 @@ export default function Task({ onConfirmEditingTask, timer, id, descr, status, d
 
   useEffect(() => {
     inputFocus.current.focus();
-  })
+  });
 
   const changeDescr = (event) => {
     setLabel(event.target.value);
@@ -27,11 +37,11 @@ export default function Task({ onConfirmEditingTask, timer, id, descr, status, d
 
   const onStartTask = () => {
     setTimerStatus('play');
-  }
+  };
 
   const onPauseTask = () => {
     setTimerStatus('pause');
-  }
+  };
 
   let taskState = '';
   switch (status) {
@@ -58,22 +68,9 @@ export default function Task({ onConfirmEditingTask, timer, id, descr, status, d
         <label htmlFor={id}>
           <span className="title">{descr}</span>
           <span className="description description__timer">
-            <button
-              className="icon icon-play"
-              type="button"
-              aria-label="Icon Play"
-              onClick={onStartTask}
-            />
-            <button
-              className="icon icon-pause"
-              type="button"
-              aria-label="Icon Pause"
-              onClick={onPauseTask}
-            />
-            <Timer
-              timer={timer}
-              timerStatus={timerStatus}
-            />
+            <button className="icon icon-play" type="button" aria-label="Icon Play" onClick={onStartTask} />
+            <button className="icon icon-pause" type="button" aria-label="Icon Pause" onClick={onPauseTask} />
+            <Timer timer={timer} timerStatus={timerStatus} />
           </span>
           <span className="description description__date">created {date}</span>
         </label>
@@ -95,18 +92,17 @@ export default function Task({ onConfirmEditingTask, timer, id, descr, status, d
   );
 }
 
-
 Task.defaultProps = {
   descr: 'error',
   status: 'active',
-  onDoneTask: () => { },
-  onEditTask: () => { },
-  onDeleteTask: () => { },
-  onConfirmEditingTask: () => { },
+  onDoneTask: () => {},
+  onEditTask: () => {},
+  onDeleteTask: () => {},
+  onConfirmEditingTask: () => {},
   id: '',
   visible: '',
   date: '99999999 date',
-  timer: {}
+  timer: {},
 };
 
 Task.propTypes = {
@@ -119,5 +115,5 @@ Task.propTypes = {
   id: PropTypes.string,
   visible: PropTypes.string,
   date: PropTypes.string,
-  timer: PropTypes.object
+  timer: PropTypes.object,
 };

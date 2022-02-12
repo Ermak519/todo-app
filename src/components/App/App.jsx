@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
-
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import shortid from 'shortid';
 
 import NewTaskForm from '../NewTaskForm/NewTaskForm.jsx';
 import { TaskList } from '../TaskList';
 import { Footer } from '../Footer';
+
 import './App.scss';
 
 export default function App() {
-
   const [tasksData, setTasksData] = useState([
     {
       id: `id_${shortid.generate()}`,
@@ -20,8 +19,8 @@ export default function App() {
       visible: '',
       timer: {
         sec: '5',
-        min: '0'
-      }
+        min: '0',
+      },
     },
     {
       id: `id_${shortid.generate()}`,
@@ -32,8 +31,8 @@ export default function App() {
       visible: '',
       timer: {
         sec: '5',
-        min: '10'
-      }
+        min: '10',
+      },
     },
     {
       id: `id_${shortid.generate()}`,
@@ -44,8 +43,8 @@ export default function App() {
       visible: '',
       timer: {
         sec: '0',
-        min: '10'
-      }
+        min: '10',
+      },
     },
   ]);
 
@@ -65,16 +64,16 @@ export default function App() {
       const elem = item;
       if (filter !== 'all') {
         if (item.status !== filter) {
-          elem.visible = 'hide'
+          elem.visible = 'hide';
         } else {
-          elem.visible = ''
+          elem.visible = '';
         }
       } else {
-        elem.visible = ''
+        elem.visible = '';
       }
-      return true
-    })
-    setTasksData([...arr])
+      return true;
+    });
+    setTasksData([...arr]);
   };
 
   const onFilterTasks = (id) => {
@@ -89,7 +88,6 @@ export default function App() {
     toggleFilterTasks(item.descr.toLowerCase());
   };
 
-
   const onAddTask = (text, taskMin, taskSec) => {
     const newItem = {
       id: `id_${shortid.generate()}`,
@@ -99,10 +97,10 @@ export default function App() {
       createDate: `${new Date()}`,
       timer: {
         min: taskMin,
-        sec: taskSec
-      }
+        sec: taskSec,
+      },
     };
-    setTasksData([...tasksData, newItem])
+    setTasksData([...tasksData, newItem]);
   };
 
   const toggleCompletedTask = (status) => {
@@ -115,32 +113,32 @@ export default function App() {
   const onDoneTask = (id) => {
     const item = tasksData[id];
     item.status = toggleCompletedTask(item.status);
-    setTasksData([...tasksData.slice(0, id), item, ...tasksData.slice(id + 1)])
+    setTasksData([...tasksData.slice(0, id), item, ...tasksData.slice(id + 1)]);
   };
 
   const onEditTask = (id) => {
     const item = tasksData[id];
     item.prevStatus = item.status;
     item.status = 'editing';
-    setTasksData([...tasksData.slice(0, id), item, ...tasksData.slice(id + 1)])
+    setTasksData([...tasksData.slice(0, id), item, ...tasksData.slice(id + 1)]);
   };
 
   const onConfirmEditingTask = (id, text) => {
-    const [item] = tasksData.filter(obj => obj.id === id);
-    const idx = tasksData.indexOf(item)
+    const [item] = tasksData.filter((obj) => obj.id === id);
+    const idx = tasksData.indexOf(item);
     item.description = text;
     item.status = item.prevStatus;
     const date = item.createDate;
     item.createDate = date;
-    setTasksData([...tasksData.slice(0, idx), item, ...tasksData.slice(idx + 1)])
+    setTasksData([...tasksData.slice(0, idx), item, ...tasksData.slice(idx + 1)]);
   };
 
   const onDeleteTask = (id) => {
-    setTasksData([...tasksData.slice(0, id), ...tasksData.slice(id + 1)])
+    setTasksData([...tasksData.slice(0, id), ...tasksData.slice(id + 1)]);
   };
 
   const onDeleteAllDoneTasks = () => {
-    setTasksData(tasksData.filter((obj) => obj.status !== 'completed'))
+    setTasksData(tasksData.filter((obj) => obj.status !== 'completed'));
   };
 
   return (
@@ -148,10 +146,7 @@ export default function App() {
       <header className="header">
         <h1>todos</h1>
       </header>
-      <NewTaskForm
-        onAddTask={onAddTask}
-        allTasks={tasksData}
-      />
+      <NewTaskForm onAddTask={onAddTask} allTasks={tasksData} />
       <TaskList
         tasksData={tasksData}
         onDoneTask={onDoneTask}

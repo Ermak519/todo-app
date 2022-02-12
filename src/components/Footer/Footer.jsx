@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import './Footer.scss';
 
 export default function Footer({ count, btnFiltersStatus, onFilterTasks, onDeleteDoneTasks }) {

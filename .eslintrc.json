@@ -70,22 +70,7 @@
         "jsx-a11y/anchor-is-valid": [
             "off"
         ],
-        "jsx-a11y/label-has-associated-control": [
-            2,
-            {
-                "labelComponents": [
-                    "CustomLabel"
-                ],
-                "labelAttributes": [
-                    "inputLabel"
-                ],
-                "controlComponents": [
-                    "CustomInput"
-                ],
-                "assert": "both",
-                "depth": 3
-            }
-        ],
+        "jsx-a11y/label-has-associated-control": "off",
         "react/state-in-constructor": [
             "off"
         ],
