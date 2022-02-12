@@ -67,7 +67,7 @@ export default function NewTaskForm({ onAddTask }) {
         />
       </Tooltip>
       <label htmlFor="new-todo__sec" />
-      <Tooltip placement="topLeft" title="Enter number of secondes">
+      <Tooltip placement="topLeft" title="Enter number of seconds">
         <input
           type="text"
           className="new-todo-form__timer"
@@ -82,7 +82,7 @@ export default function NewTaskForm({ onAddTask }) {
 }
 
 NewTaskForm.defaultProps = {
-  onAddTask: () => {},
+  onAddTask: () => { },
 };
 
 NewTaskForm.propTypes = {
